@@ -1,0 +1,6 @@
+Pods
+Podfile.lock
+Training-Adli.xcworkspace
+xcuserdata/
+.idea/
+*.iml
