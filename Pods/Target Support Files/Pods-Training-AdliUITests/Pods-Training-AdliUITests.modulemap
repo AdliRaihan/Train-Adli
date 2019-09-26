@@ -1,0 +1,6 @@
+framework module Pods_Training_AdliUITests {
+  umbrella header "Pods-Training-AdliUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

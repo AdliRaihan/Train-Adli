@@ -1,0 +1,6 @@
+framework module Pods_Training_Adli {
+  umbrella header "Pods-Training-Adli-umbrella.h"
+
+  export *
+  module * { export * }
+}
