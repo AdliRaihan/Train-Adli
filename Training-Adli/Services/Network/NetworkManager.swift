@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 20/09/19.
+//  Created by Adli Raihan on 20/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
@@ -36,10 +36,6 @@ extension trainServices : TargetType {
     var task: Task {
         return NetworkTasks.createRequest(service: self)
     }
-    
-
-
-
 
     var headers: [String : String]? {
         "Belegug".createMessage(message: "\(NetworkHeader.header(self))")

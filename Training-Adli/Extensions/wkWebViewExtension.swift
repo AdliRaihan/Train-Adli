@@ -2,7 +2,7 @@
 //  wkWebViewExtension.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 24/09/19.
+//  Created by Adli Raihan on 24/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 

@@ -42,6 +42,9 @@
 		06D766EB232F868200316C72 /* ExploreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D766EA232F868200316C72 /* ExploreTableViewCell.xib */; };
 		06E6FD5D233C67B60006D0A0 /* NetworkHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6FD5C233C67B60006D0A0 /* NetworkHeader.swift */; };
 		06E6FD5F233C76E20006D0A0 /* NetworkPlugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6FD5E233C76E20006D0A0 /* NetworkPlugins.swift */; };
+		06E6FD61233CB8D40006D0A0 /* AuthCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6FD60233CB8D40006D0A0 /* AuthCompletion.swift */; };
+		06E6FD64233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6FD62233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift */; };
+		06E6FD65233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E6FD63233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib */; };
 		06ED866F23320904003C0D21 /* EnchanterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ED866E23320904003C0D21 /* EnchanterViewController.swift */; };
 		06ED86712332091F003C0D21 /* EnchanterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06ED86702332091F003C0D21 /* EnchanterViewController.xib */; };
 		77B4746307FCB135F59EF3A1 /* Pods_Training_AdliTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB70BAE995D39899781F93C /* Pods_Training_AdliTests.framework */; };
@@ -108,6 +111,9 @@
 		06D766EA232F868200316C72 /* ExploreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreTableViewCell.xib; sourceTree = "<group>"; };
 		06E6FD5C233C67B60006D0A0 /* NetworkHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHeader.swift; sourceTree = "<group>"; };
 		06E6FD5E233C76E20006D0A0 /* NetworkPlugins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPlugins.swift; sourceTree = "<group>"; };
+		06E6FD60233CB8D40006D0A0 /* AuthCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCompletion.swift; sourceTree = "<group>"; };
+		06E6FD62233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashLoginCostumCredentialViewController.swift; sourceTree = "<group>"; };
+		06E6FD63233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnsplashLoginCostumCredentialViewController.xib; sourceTree = "<group>"; };
 		06ED866E23320904003C0D21 /* EnchanterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnchanterViewController.swift; sourceTree = "<group>"; };
 		06ED86702332091F003C0D21 /* EnchanterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnchanterViewController.xib; sourceTree = "<group>"; };
 		07DC9CB32F5B13AED3EF9F29 /* Pods-Training-AdliUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Training-AdliUITests.debug.xcconfig"; path = "Target Support Files/Pods-Training-AdliUITests/Pods-Training-AdliUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				06325FC22334BF53006D67C3 /* AuthWorker.swift */,
+				06E6FD60233CB8D40006D0A0 /* AuthCompletion.swift */,
 			);
 			path = Worker;
 			sourceTree = "<group>";
@@ -304,6 +311,8 @@
 			children = (
 				06D766DD232F476B00316C72 /* DashboardViewController.swift */,
 				06D766DE232F476B00316C72 /* DashboardViewController.xib */,
+				06E6FD62233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift */,
+				06E6FD63233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -460,6 +469,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E6FD65233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib in Resources */,
 				06D766E7232F85D000316C72 /* ExploreViewController.xib in Resources */,
 				06D766EB232F868200316C72 /* ExploreTableViewCell.xib in Resources */,
 				0622391D23289C3F0095BC7B /* LaunchScreen.storyboard in Resources */,
@@ -602,6 +612,7 @@
 				06D766E6232F85D000316C72 /* ExploreViewController.swift in Sources */,
 				0622395B2328AC510095BC7B /* Entity+CoreDataProperties.swift in Sources */,
 				0622395E2328B29F0095BC7B /* PrintExtensions.swift in Sources */,
+				06E6FD61233CB8D40006D0A0 /* AuthCompletion.swift in Sources */,
 				06325FC02334BE58006D67C3 /* NetworkPath.swift in Sources */,
 				062239692328DF790095BC7B /* ColorExtension.swift in Sources */,
 				062239632328CF310095BC7B /* CoreDataModel.swift in Sources */,
@@ -609,6 +620,7 @@
 				06325FB72334AD55006D67C3 /* oauthModel.swift in Sources */,
 				0622394523289FC80095BC7B /* login_credenstial.xcdatamodeld in Sources */,
 				062239652328D1A50095BC7B /* EntityKName.swift in Sources */,
+				06E6FD64233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift in Sources */,
 				06D766DF232F476B00316C72 /* DashboardViewController.swift in Sources */,
 				06325FC32334BF53006D67C3 /* AuthWorker.swift in Sources */,
 				0622394B2328AAD30095BC7B /* loginCredenstialSwift.swift in Sources */,

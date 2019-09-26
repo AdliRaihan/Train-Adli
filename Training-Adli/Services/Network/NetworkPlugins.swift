@@ -2,7 +2,7 @@
 //  NetworkPlugins.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 26/09/19.
+//  Created by Adli Raihan on 26/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
@@ -11,6 +11,6 @@ import Moya
 
 class NetworkPlugins : PluginType {
     func willSend(_ request: RequestType, target: TargetType) {
-        "Network Log's".createMessage(message: "\(String(describing: request.request?.url?.absoluteString))")
+        "Network Log's".createMessage(message: "\(String(describing: request)) \(String(describing: target))")
     }
 }

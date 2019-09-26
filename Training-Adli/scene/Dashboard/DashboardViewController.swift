@@ -2,7 +2,7 @@
 //  DashboardViewController.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 16/09/19.
+//  Created by Adli Raihan on 16/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ struct userInformations {
     var codeAuthorization : String = "" 
 }
 
-class DashboardViewController: UIViewController {
+class DashboardViewController: BaseViewController {
 
     @IBOutlet weak var wbView: WKWebView!
     @IBOutlet weak var profileViewHolderShadow: UIView!
@@ -125,11 +125,27 @@ class DashboardViewController: UIViewController {
     }
     
     @objc func exploreGesture (_ sender : Any) {
+        prepareExec()
+    }
+    
+    // Hide Web View Actions
+    @IBAction func hideWebViewAction(_ sender: Any) {
+        // Hide webview action dipencet
+        self.wbView.isHidden = true
+    }
+    
+    // Prepare Exec
+    private func prepareExec () {
+        self.present(initializeModal(), animated: true)
+    }
+    // Execution
+    private func execLogin () {
         let unsplashRequest = unsplash.AuthRequest.init()
         unsplashRequest.clientId = ConstantVariables.clientId
         unsplashRequest.redirectUrl = ConstantVariables.redirectUrl
         unsplashRequest.responseType = ConstantVariables.responseType
         unsplashRequest.scope = ConstantVariables.scope
+        self.showLoading("This might take a while...")
         
         AuthWorker().getAuth(unsplashRequest) { (value) in
             switch value {
@@ -137,16 +153,20 @@ class DashboardViewController: UIViewController {
                 self.wbView.clearCache()
                 self.wbView.isHidden = false
                 self.wbView.load(URLRequest.init(url: URL.init(string: ConstantVariables.urlToGetAuthorization)!))
+                self.hideLoading("Completed.")
+                break
+            case .failed(let message):
+                "failed".createMessage(message: message)
                 break
             }
         }
-        
     }
-
-    // Hide Web View Actions
-    @IBAction func hideWebViewAction(_ sender: Any) {
-        // Hide webview action dipencet
-        self.wbView.isHidden = true
+    
+    // initialize Modal
+    private func initializeModal () -> UnsplashLoginCostumCredentialViewController {
+        let unsplashDialog = UnsplashLoginCostumCredentialViewController.init(nibName: "UnsplashLoginCostumCredentialViewController", bundle: nil)
+        unsplashDialog.modalPresentationStyle = .overCurrentContext
+        return unsplashDialog
     }
     
     

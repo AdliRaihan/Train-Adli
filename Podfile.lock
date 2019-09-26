@@ -128,31 +128,31 @@ DEPENDENCIES:
   - AlamofireImage (~> 3.3)
   - AlamofireNetworkActivityLogger (from `https://github.com/fachrifaul/AlamofireNetworkActivityLogger.git`, branch `master`)
   - Crashlytics
-  - CropViewController
+  - CropViewController (= 2.5.1)
   - DropDown (= 2.0.1)
   - Fabric
   - FCUUID
-  - FDTake
+  - FDTake (= 3.0.0)
   - Firebase/Core
   - Firebase/Messaging
-  - FSPagerView
-  - GooglePlaces
+  - FSPagerView (= 0.8.2)
+  - GooglePlaces (= 3.2.0)
   - Heimdallr (from `https://github.com/fachrifaul/Heimdallr.swift.git`, branch `master`)
   - Hue (from `https://github.com/fachrifaul/Hue.git`, branch `master`)
   - ImageSlideshow/Kingfisher (= 1.5.3)
-  - IQKeyboardManagerSwift
+  - IQKeyboardManagerSwift (= 6.4.0)
   - KeychainAccess
   - Kingfisher (~> 4.6.4)
-  - Material
+  - Material (= 3.1.6)
   - Moya/RxSwift (~> 11.0.0)
-  - MZFormSheetPresentationController
+  - MZFormSheetPresentationController (= 2.4.3)
   - ObjectMapper (~> 3.1)
   - PureLayout
   - QRCodeReader.swift (~> 8.1.1)
   - RadioButton
-  - RealmSwift
+  - RealmSwift (= 3.17.1)
   - RxSwift (~> 4.0)
-  - SVProgressHUD
+  - SVProgressHUD (= 2.2.5)
   - SwiftyUserDefaults (= 4.0.0-beta.2)
   - UICheckbox.Swift
   - Wormholy (= 1.2.3)
@@ -276,6 +276,6 @@ SPEC CHECKSUMS:
   Wormholy: 0222592d5c7a019527911701ba7fd5fe64c798da
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: a20b2a2170bb4d15bf8b3a49677499be655129b5
+PODFILE CHECKSUM: 89063a6a5156d8fd6f64c3efa45b02af35b01a36
 
 COCOAPODS: 1.7.2

@@ -2,11 +2,12 @@
 //  BaseViewController.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 11/09/19.
+//  Created by Adli Raihan on 11/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
 import UIKit
+import SVProgressHUD
 import CoreData
 
 class BaseViewController: UIViewController {
@@ -42,6 +43,14 @@ class BaseViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         self.navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "", style: .done, target: nil, action: nil)
+    }
+    
+    func showLoading (_ message : String ) {
+        SVProgressHUD.show(withStatus: message)
+    }
+    
+    func hideLoading (_ message : String ) {
+        SVProgressHUD.dismiss(withDelay: 1)
     }
 
 }
