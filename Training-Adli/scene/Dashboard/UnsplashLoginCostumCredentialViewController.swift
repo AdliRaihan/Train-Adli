@@ -53,16 +53,25 @@ class UnsplashLoginCostumCredentialViewController: UIViewController {
     }
     // when user aggreed
     @IBAction func understoodActions(_ sender: Any) {
-        delegate?.understood()
+        hideMe {
+            self.dismiss(animated: true) {
+                self.delegate?.understood()
+            }
+        }
     }
     // when use disaggree
     @IBAction func nopeActions(_ sender: Any) {
+        hideMe {
+             self.dismiss(animated: true, completion: nil)
+        }
+    }
+    // hide
+    private func hideMe (completion: @escaping () -> Void ) {
         UIView.animate(withDuration: 0.25, animations: {
             self.hideAlphaBackground()
         }) { (finish) in
-            if finish { self.dismiss(animated: true, completion: nil)}
+            if finish { completion() }
         }
-        delegate?.nope()
     }
     
     /*

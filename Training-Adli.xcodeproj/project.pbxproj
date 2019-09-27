@@ -32,6 +32,9 @@
 		06325FC32334BF53006D67C3 /* AuthWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06325FC22334BF53006D67C3 /* AuthWorker.swift */; };
 		06325FC52334C4C3006D67C3 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06325FC42334C4C3006D67C3 /* DataExtensions.swift */; };
 		06325FC72334CE9C006D67C3 /* HeimdallrNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06325FC62334CE9C006D67C3 /* HeimdallrNetwork.swift */; };
+		06911A37233DB59C0017DF60 /* ConstantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06911A36233DB59C0017DF60 /* ConstantColor.swift */; };
+		06911A3A233DBD010017DF60 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06911A38233DBD010017DF60 /* WebViewViewController.swift */; };
+		06911A3B233DBD010017DF60 /* WebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06911A39233DBD010017DF60 /* WebViewViewController.xib */; };
 		06BACE3A233A0647007521F6 /* wkWebViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BACE39233A0647007521F6 /* wkWebViewExtension.swift */; };
 		06D766DF232F476B00316C72 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D766DD232F476B00316C72 /* DashboardViewController.swift */; };
 		06D766E0232F476B00316C72 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D766DE232F476B00316C72 /* DashboardViewController.xib */; };
@@ -101,6 +104,9 @@
 		06325FC22334BF53006D67C3 /* AuthWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWorker.swift; sourceTree = "<group>"; };
 		06325FC42334C4C3006D67C3 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		06325FC62334CE9C006D67C3 /* HeimdallrNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeimdallrNetwork.swift; sourceTree = "<group>"; };
+		06911A36233DB59C0017DF60 /* ConstantColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantColor.swift; sourceTree = "<group>"; };
+		06911A38233DBD010017DF60 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		06911A39233DBD010017DF60 /* WebViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewViewController.xib; sourceTree = "<group>"; };
 		06BACE39233A0647007521F6 /* wkWebViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wkWebViewExtension.swift; sourceTree = "<group>"; };
 		06D766DD232F476B00316C72 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		06D766DE232F476B00316C72 /* DashboardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
@@ -293,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				06325FBD2334BBE1006D67C3 /* ConstantVariables.swift */,
+				06911A36233DB59C0017DF60 /* ConstantColor.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -313,6 +320,8 @@
 				06D766DE232F476B00316C72 /* DashboardViewController.xib */,
 				06E6FD62233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift */,
 				06E6FD63233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib */,
+				06911A38233DBD010017DF60 /* WebViewViewController.swift */,
+				06911A39233DBD010017DF60 /* WebViewViewController.xib */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -471,6 +480,7 @@
 			files = (
 				06E6FD65233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib in Resources */,
 				06D766E7232F85D000316C72 /* ExploreViewController.xib in Resources */,
+				06911A3B233DBD010017DF60 /* WebViewViewController.xib in Resources */,
 				06D766EB232F868200316C72 /* ExploreTableViewCell.xib in Resources */,
 				0622391D23289C3F0095BC7B /* LaunchScreen.storyboard in Resources */,
 				06ED86712332091F003C0D21 /* EnchanterViewController.xib in Resources */,
@@ -607,6 +617,7 @@
 				06ED866F23320904003C0D21 /* EnchanterViewController.swift in Sources */,
 				06D766E2232F793600316C72 /* LabelExtension.swift in Sources */,
 				06325FC52334C4C3006D67C3 /* DataExtensions.swift in Sources */,
+				06911A3A233DBD010017DF60 /* WebViewViewController.swift in Sources */,
 				06E6FD5F233C76E20006D0A0 /* NetworkPlugins.swift in Sources */,
 				062239672328DC930095BC7B /* ButtonExtension.swift in Sources */,
 				06D766E6232F85D000316C72 /* ExploreViewController.swift in Sources */,
@@ -626,6 +637,7 @@
 				0622394B2328AAD30095BC7B /* loginCredenstialSwift.swift in Sources */,
 				06325FB92334AFCD006D67C3 /* oauthTokenModel.swift in Sources */,
 				06BACE3A233A0647007521F6 /* wkWebViewExtension.swift in Sources */,
+				06911A37233DB59C0017DF60 /* ConstantColor.swift in Sources */,
 				062239612328CEC10095BC7B /* BaseViewController.swift in Sources */,
 				06E6FD5D233C67B60006D0A0 /* NetworkHeader.swift in Sources */,
 				0622395A2328AC510095BC7B /* Entity+CoreDataClass.swift in Sources */,
