@@ -2,7 +2,7 @@
 //  UnsplashLoginCostumCredentialViewController.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 26/09/19.
+//  Created by Adli Raihan on 26/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 

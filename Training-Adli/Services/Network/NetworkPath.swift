@@ -12,9 +12,11 @@ class NetworkPath {
     class func createPath (_ services : trainServices) -> String? {
         switch services {
         case .oauth:
-            return "authorize"
+            return "oauth/authorize"
         case .oatuhAccessToken:
-            return "token"
+            return "oauth/token"
+        case .getProfile():
+            return "me"
         }
     }
 }

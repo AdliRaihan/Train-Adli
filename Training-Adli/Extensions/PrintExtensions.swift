@@ -11,7 +11,7 @@ import Foundation
 
 extension String {
     
-    func createMessage ( message : String ) {
+    func createMessage ( message : Any ) {
         print("Message Info (\(self)) : \(message)")
     }
 }

@@ -53,6 +53,10 @@ class BaseViewController: UIViewController {
     func hideLoading (_ message : String ) {
         SVProgressHUD.dismiss(withDelay: 1)
     }
+    
+    func showAlert (_message : String) {
+        self.present(UIAlertController.init(title: "", message: _message, preferredStyle: .alert), animated: true, completion: nil)
+    }
 
 }
 

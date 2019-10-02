@@ -8,10 +8,8 @@
 
 import UIKit
 import WebKit
+import SwiftyUserDefaults
 
-struct userInformations {
-    var codeAuthorization : String = "" 
-}
 
 class DashboardViewController: BaseViewController {
 
@@ -33,10 +31,9 @@ class DashboardViewController: BaseViewController {
     /* Menu Third */
     @IBOutlet weak var itemsMenuThird: UIView!
     @IBOutlet weak var itemsMenuThirdImage : UIImageView!
-    /* UserInformation */
-    var userInfo : userInformations = userInformations()
     
     private var caGradient = CAGradientLayer()
+    private var userAuth : String = ""
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -52,6 +49,11 @@ class DashboardViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setupUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        self.userAuth = Defaults[DefaultsKeys.userAuthenticationCode]
+    }
 
     private func setupUI () {
         setupProfileViewHolder ()
@@ -62,18 +64,6 @@ class DashboardViewController: BaseViewController {
         imageProfile.circleRadius()
     }
     
-    
-    private func createAuthorization () {
-        let request = unsplash.oauthTokenModel.tokenRequest()
-        request.clientId = ConstantVariables.clientId
-        request.scope = ConstantVariables.scope
-        request.redirectUrl = ConstantVariables.redirectUrl
-        request.secretKey = ConstantVariables.secretKey
-        request.code = self.userInfo.codeAuthorization
-        AuthWorker().getToken(request) { (result) in
-            
-        }
-    }
     
     private func setupProfileViewHolder () {
         guard LevelLabel != nil else { return }
@@ -95,6 +85,8 @@ class DashboardViewController: BaseViewController {
     }
     
     private func setupTopMenu () {
+        itemsMenuTop.isUserInteractionEnabled = true
+        itemsMenuTop.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(menuOneActions(_:))))
         itemsMenuTop.changeColorPrimary(_color: .primaryDarkFlat)
         itemsMenuTop.setShadow()
         itemsMenuTop.constantRadius()
@@ -119,8 +111,22 @@ class DashboardViewController: BaseViewController {
         itemsMenuThirdImage.image = #imageLiteral(resourceName: "ic_funds_colored").withRenderingMode(.alwaysTemplate)
     }
     
+    @objc func menuOneActions (_ sender : Any ) {
+        if userAuth == "" {
+            exploreGesture(AnyClass.self)
+        } else {
+            prepareRouteToSVG()
+        }
+    }
+    
     @objc func exploreGesture (_ sender : Any) {
-        prepareExec()
+        if userAuth == "" {
+            prepareExec()
+        } else {
+            "Login Info".createMessage(message: "Already Logged in.")
+            userAuth = ""
+            Defaults[DefaultsKeys.userAuthenticationCode] = userAuth
+        }
     }
     
     // Prepare Exec
@@ -161,6 +167,10 @@ extension DashboardViewController {
         self.show(destination, sender: nil)
     }
     
+    func prepareRouteToSVG() {
+        let destination = ProfileViewController.init(nibName: "ProfileViewController", bundle: nil)
+        self.show(destination, sender: nil)
+    }
     
     
     // initialize Modal

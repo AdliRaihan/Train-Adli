@@ -32,10 +32,23 @@
 		06325FC32334BF53006D67C3 /* AuthWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06325FC22334BF53006D67C3 /* AuthWorker.swift */; };
 		06325FC52334C4C3006D67C3 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06325FC42334C4C3006D67C3 /* DataExtensions.swift */; };
 		06325FC72334CE9C006D67C3 /* HeimdallrNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06325FC62334CE9C006D67C3 /* HeimdallrNetwork.swift */; };
+		064BB214234327D600392C57 /* SVGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064BB212234327D600392C57 /* SVGViewController.swift */; };
+		064BB215234327D600392C57 /* SVGViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064BB213234327D600392C57 /* SVGViewController.xib */; };
+		064BB21723432B2F00392C57 /* BenzierPathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064BB21623432B2F00392C57 /* BenzierPathExtensions.swift */; };
+		064BB21923432B9C00392C57 /* SVGCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064BB21823432B9C00392C57 /* SVGCanvasView.swift */; };
 		06911A37233DB59C0017DF60 /* ConstantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06911A36233DB59C0017DF60 /* ConstantColor.swift */; };
 		06911A3A233DBD010017DF60 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06911A38233DBD010017DF60 /* WebViewViewController.swift */; };
 		06911A3B233DBD010017DF60 /* WebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06911A39233DBD010017DF60 /* WebViewViewController.xib */; };
+		06911A3D233DE9490017DF60 /* ConstantDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06911A3C233DE9490017DF60 /* ConstantDefaults.swift */; };
 		06BACE3A233A0647007521F6 /* wkWebViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BACE39233A0647007521F6 /* wkWebViewExtension.swift */; };
+		06CEAE1E2344899800E9EF3C /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE182344899800E9EF3C /* ProfilePresenter.swift */; };
+		06CEAE1F2344899800E9EF3C /* ProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE192344899800E9EF3C /* ProfileWorker.swift */; };
+		06CEAE202344899800E9EF3C /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE1A2344899800E9EF3C /* ProfileRouter.swift */; };
+		06CEAE212344899800E9EF3C /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE1B2344899800E9EF3C /* ProfileModels.swift */; };
+		06CEAE222344899800E9EF3C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE1C2344899800E9EF3C /* ProfileViewController.swift */; };
+		06CEAE232344899800E9EF3C /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE1D2344899800E9EF3C /* ProfileInteractor.swift */; };
+		06CEAE25234491C400E9EF3C /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06CEAE24234491C400E9EF3C /* ProfileViewController.xib */; };
+		06CEAE28234496A400E9EF3C /* ManagerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE27234496A400E9EF3C /* ManagerParser.swift */; };
 		06D766DF232F476B00316C72 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D766DD232F476B00316C72 /* DashboardViewController.swift */; };
 		06D766E0232F476B00316C72 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D766DE232F476B00316C72 /* DashboardViewController.xib */; };
 		06D766E2232F793600316C72 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D766E1232F793600316C72 /* LabelExtension.swift */; };
@@ -104,10 +117,23 @@
 		06325FC22334BF53006D67C3 /* AuthWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWorker.swift; sourceTree = "<group>"; };
 		06325FC42334C4C3006D67C3 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		06325FC62334CE9C006D67C3 /* HeimdallrNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeimdallrNetwork.swift; sourceTree = "<group>"; };
+		064BB212234327D600392C57 /* SVGViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGViewController.swift; sourceTree = "<group>"; };
+		064BB213234327D600392C57 /* SVGViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SVGViewController.xib; sourceTree = "<group>"; };
+		064BB21623432B2F00392C57 /* BenzierPathExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenzierPathExtensions.swift; sourceTree = "<group>"; };
+		064BB21823432B9C00392C57 /* SVGCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGCanvasView.swift; sourceTree = "<group>"; };
 		06911A36233DB59C0017DF60 /* ConstantColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantColor.swift; sourceTree = "<group>"; };
 		06911A38233DBD010017DF60 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		06911A39233DBD010017DF60 /* WebViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewViewController.xib; sourceTree = "<group>"; };
+		06911A3C233DE9490017DF60 /* ConstantDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantDefaults.swift; sourceTree = "<group>"; };
 		06BACE39233A0647007521F6 /* wkWebViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wkWebViewExtension.swift; sourceTree = "<group>"; };
+		06CEAE182344899800E9EF3C /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		06CEAE192344899800E9EF3C /* ProfileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWorker.swift; sourceTree = "<group>"; };
+		06CEAE1A2344899800E9EF3C /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		06CEAE1B2344899800E9EF3C /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
+		06CEAE1C2344899800E9EF3C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		06CEAE1D2344899800E9EF3C /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
+		06CEAE24234491C400E9EF3C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		06CEAE27234496A400E9EF3C /* ManagerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerParser.swift; sourceTree = "<group>"; };
 		06D766DD232F476B00316C72 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		06D766DE232F476B00316C72 /* DashboardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
 		06D766E1232F793600316C72 /* LabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
@@ -219,6 +245,8 @@
 		0622394023289C830095BC7B /* scene */ = {
 			isa = PBXGroup;
 			children = (
+				06CEAE172344897700E9EF3C /* Profile */,
+				064BB2112343278D00392C57 /* SVGController */,
 				06ED866D233208D6003C0D21 /* Investchanter */,
 				06D766E3232F85AB00316C72 /* Explore */,
 				06D766DC232F474000316C72 /* Dashboard */,
@@ -248,6 +276,7 @@
 				06D766E1232F793600316C72 /* LabelExtension.swift */,
 				06325FC42334C4C3006D67C3 /* DataExtensions.swift */,
 				06BACE39233A0647007521F6 /* wkWebViewExtension.swift */,
+				064BB21623432B2F00392C57 /* BenzierPathExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -265,6 +294,7 @@
 		06325FB12334A9E4006D67C3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				06CEAE262344969000E9EF3C /* ParseManager */,
 				06325FC12334BF12006D67C3 /* Worker */,
 				06325FBC2334BBCE006D67C3 /* Constant */,
 				06325FB52334AD46006D67C3 /* Models */,
@@ -300,6 +330,7 @@
 			children = (
 				06325FBD2334BBE1006D67C3 /* ConstantVariables.swift */,
 				06911A36233DB59C0017DF60 /* ConstantColor.swift */,
+				06911A3C233DE9490017DF60 /* ConstantDefaults.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -313,9 +344,49 @@
 			path = Worker;
 			sourceTree = "<group>";
 		};
+		064BB2112343278D00392C57 /* SVGController */ = {
+			isa = PBXGroup;
+			children = (
+				064BB212234327D600392C57 /* SVGViewController.swift */,
+				064BB213234327D600392C57 /* SVGViewController.xib */,
+				064BB21823432B9C00392C57 /* SVGCanvasView.swift */,
+			);
+			path = SVGController;
+			sourceTree = "<group>";
+		};
+		06CEAE16234488C100E9EF3C /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		06CEAE172344897700E9EF3C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				06CEAE182344899800E9EF3C /* ProfilePresenter.swift */,
+				06CEAE192344899800E9EF3C /* ProfileWorker.swift */,
+				06CEAE1A2344899800E9EF3C /* ProfileRouter.swift */,
+				06CEAE1B2344899800E9EF3C /* ProfileModels.swift */,
+				06CEAE1C2344899800E9EF3C /* ProfileViewController.swift */,
+				06CEAE1D2344899800E9EF3C /* ProfileInteractor.swift */,
+				06CEAE24234491C400E9EF3C /* ProfileViewController.xib */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		06CEAE262344969000E9EF3C /* ParseManager */ = {
+			isa = PBXGroup;
+			children = (
+				06CEAE27234496A400E9EF3C /* ManagerParser.swift */,
+			);
+			path = ParseManager;
+			sourceTree = "<group>";
+		};
 		06D766DC232F474000316C72 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				06CEAE16234488C100E9EF3C /* Dashboard */,
 				06D766DD232F476B00316C72 /* DashboardViewController.swift */,
 				06D766DE232F476B00316C72 /* DashboardViewController.xib */,
 				06E6FD62233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift */,
@@ -480,11 +551,13 @@
 			files = (
 				06E6FD65233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib in Resources */,
 				06D766E7232F85D000316C72 /* ExploreViewController.xib in Resources */,
+				064BB215234327D600392C57 /* SVGViewController.xib in Resources */,
 				06911A3B233DBD010017DF60 /* WebViewViewController.xib in Resources */,
 				06D766EB232F868200316C72 /* ExploreTableViewCell.xib in Resources */,
 				0622391D23289C3F0095BC7B /* LaunchScreen.storyboard in Resources */,
 				06ED86712332091F003C0D21 /* EnchanterViewController.xib in Resources */,
 				0622391A23289C3F0095BC7B /* Assets.xcassets in Resources */,
+				06CEAE25234491C400E9EF3C /* ProfileViewController.xib in Resources */,
 				06D766E0232F476B00316C72 /* DashboardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,19 +704,30 @@
 				06325FB72334AD55006D67C3 /* oauthModel.swift in Sources */,
 				0622394523289FC80095BC7B /* login_credenstial.xcdatamodeld in Sources */,
 				062239652328D1A50095BC7B /* EntityKName.swift in Sources */,
+				06CEAE28234496A400E9EF3C /* ManagerParser.swift in Sources */,
+				06CEAE222344899800E9EF3C /* ProfileViewController.swift in Sources */,
 				06E6FD64233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift in Sources */,
 				06D766DF232F476B00316C72 /* DashboardViewController.swift in Sources */,
 				06325FC32334BF53006D67C3 /* AuthWorker.swift in Sources */,
 				0622394B2328AAD30095BC7B /* loginCredenstialSwift.swift in Sources */,
 				06325FB92334AFCD006D67C3 /* oauthTokenModel.swift in Sources */,
 				06BACE3A233A0647007521F6 /* wkWebViewExtension.swift in Sources */,
+				06CEAE202344899800E9EF3C /* ProfileRouter.swift in Sources */,
 				06911A37233DB59C0017DF60 /* ConstantColor.swift in Sources */,
 				062239612328CEC10095BC7B /* BaseViewController.swift in Sources */,
 				06E6FD5D233C67B60006D0A0 /* NetworkHeader.swift in Sources */,
 				0622395A2328AC510095BC7B /* Entity+CoreDataClass.swift in Sources */,
 				0622391323289C3E0095BC7B /* AppDelegate.swift in Sources */,
 				0604502B2329005500EDD35B /* ViewExtension.swift in Sources */,
+				06CEAE232344899800E9EF3C /* ProfileInteractor.swift in Sources */,
+				06CEAE1E2344899800E9EF3C /* ProfilePresenter.swift in Sources */,
+				064BB21723432B2F00392C57 /* BenzierPathExtensions.swift in Sources */,
+				06CEAE212344899800E9EF3C /* ProfileModels.swift in Sources */,
+				064BB214234327D600392C57 /* SVGViewController.swift in Sources */,
+				064BB21923432B9C00392C57 /* SVGCanvasView.swift in Sources */,
+				06CEAE1F2344899800E9EF3C /* ProfileWorker.swift in Sources */,
 				06325FC72334CE9C006D67C3 /* HeimdallrNetwork.swift in Sources */,
+				06911A3D233DE9490017DF60 /* ConstantDefaults.swift in Sources */,
 				06325FBB2334B6FE006D67C3 /* NetworkTasks.swift in Sources */,
 				06325FBE2334BBE1006D67C3 /* ConstantVariables.swift in Sources */,
 			);

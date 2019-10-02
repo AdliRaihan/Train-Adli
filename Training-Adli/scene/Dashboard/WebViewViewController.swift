@@ -2,14 +2,19 @@
 //  WebViewViewController.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 27/09/19.
+//  Created by Adli Raihan on 27/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
 import UIKit
 import WebKit
+import SwiftyUserDefaults
 
 class WebViewViewController: BaseViewController {
+    
+    struct userInformations {
+        var codeAuthorization : String = ""
+    }
     
     // Outlet marker
     @IBOutlet weak var addressBarView: UIView!
@@ -20,6 +25,8 @@ class WebViewViewController: BaseViewController {
     
     // website variable
     var webUrl : String = ""
+    /* UserInformation */
+    var userInfo : userInformations = userInformations()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -33,6 +40,7 @@ class WebViewViewController: BaseViewController {
         super.viewDidLoad()
         self.setupTitle(Title: "Authorization")
         setupWebView()
+        setupObserver()
     }
     
     private func setupBar (completion : @escaping (String) -> Void) {
@@ -63,8 +71,10 @@ class WebViewViewController: BaseViewController {
         if keyPath == #keyPath(WKWebView.url) {
             let url = self.webView.url!
             if let safeUrl = url.query , safeUrl.contains("code=") {
-//                self.userInfo.codeAuthorization = safeUrl.replacingOccurrences(of: "code=", with: "")
-//                createAuthorization()
+                finishPage()
+                self.showLoading("This Might Take Long...")
+                self.userInfo.codeAuthorization = safeUrl.replacingOccurrences(of: "code=", with: "")
+                createAuthorization()
             } else { return }
         }
     }
@@ -90,6 +100,31 @@ class WebViewViewController: BaseViewController {
     private func finishPage () {
         shrinkAddressBar()
         indicatorView.stopAnimating()
+    }
+    
+    
+    private func createAuthorization () {
+        let request = unsplash.oauthTokenModel.tokenRequest()
+        request.clientId = ConstantVariables.clientId
+        request.scope = ConstantVariables.scope
+        request.redirectUrl = ConstantVariables.redirectUrl
+        request.secretKey = ConstantVariables.secretKey
+        request.code = self.userInfo.codeAuthorization
+        AuthWorker().getToken(request) { (result) in
+            switch result {
+                
+            case .success(let response):
+                Defaults[.userAuthenticationCode] = response.accessToken
+                self.hideLoading("")
+                self.motionDismissViewController()
+                break
+            case .failed(let message):
+                self.showAlert(_message: message)
+                break
+            }
+            
+            
+        }
     }
     
 }

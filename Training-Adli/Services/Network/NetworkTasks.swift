@@ -16,6 +16,8 @@ class NetworkTasks {
             return .requestParameters(parameters: unsplash.createParams(param: request), encoding: URLEncoding.default)
         case .oatuhAccessToken(let request):
             return .requestParameters(parameters: unsplash.oauthTokenModel.createParams(param: request), encoding: URLEncoding.default)
+        case .getProfile():
+            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         }
     
     }

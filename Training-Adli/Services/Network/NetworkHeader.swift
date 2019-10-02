@@ -14,8 +14,7 @@ class NetworkHeader {
         switch services {
         case .oauth( _):
             return [:]
-        case .oatuhAccessToken:
-            
+        default:
             return ["Accept" : "application/json"]
         }
     }

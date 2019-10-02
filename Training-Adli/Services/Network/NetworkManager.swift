@@ -9,15 +9,17 @@
 import Foundation
 import Moya
 
-let trainProvider = MoyaProvider<trainServices>(plugins: [NetworkPlugins()])
+let authPlugin = AccessTokenPlugin.init(tokenClosure: ConstantVariables.accessToken)
+let trainProvider = MoyaProvider<trainServices>(plugins: [NetworkPlugins(),authPlugin])
 
 enum trainServices {
     case oauth (request : unsplash.AuthRequest)
     case oatuhAccessToken (request : unsplash.oauthTokenModel.tokenRequest)
+    case getProfile ()
 }
 
 
-extension trainServices : TargetType {
+extension trainServices : TargetType , AccessTokenAuthorizable {
     var baseURL: URL {
         return URL.init(string: ConstantVariables.baseURLAuth)!
     }
@@ -38,12 +40,18 @@ extension trainServices : TargetType {
     }
 
     var headers: [String : String]? {
-        "Belegug".createMessage(message: "\(NetworkHeader.header(self))")
+        "Headers".createMessage(message: "\(NetworkHeader.header(self))")
         return NetworkHeader.header(self)
     }
     
     var path : String {
         return NetworkPath.createPath(self) ?? ""
+    }
+    
+    var authorizationType: AuthorizationType {
+        switch self {
+        default: return .bearer
+        }
     }
     
 }
