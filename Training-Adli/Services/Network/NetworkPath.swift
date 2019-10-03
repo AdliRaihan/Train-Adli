@@ -17,6 +17,8 @@ class NetworkPath {
             return "oauth/token"
         case .getProfile():
             return "me"
+        case .getPhotos:
+            return "photos"
         }
     }
 }

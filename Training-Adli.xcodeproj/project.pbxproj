@@ -37,8 +37,6 @@
 		064BB21723432B2F00392C57 /* BenzierPathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064BB21623432B2F00392C57 /* BenzierPathExtensions.swift */; };
 		064BB21923432B9C00392C57 /* SVGCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064BB21823432B9C00392C57 /* SVGCanvasView.swift */; };
 		06911A37233DB59C0017DF60 /* ConstantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06911A36233DB59C0017DF60 /* ConstantColor.swift */; };
-		06911A3A233DBD010017DF60 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06911A38233DBD010017DF60 /* WebViewViewController.swift */; };
-		06911A3B233DBD010017DF60 /* WebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06911A39233DBD010017DF60 /* WebViewViewController.xib */; };
 		06911A3D233DE9490017DF60 /* ConstantDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06911A3C233DE9490017DF60 /* ConstantDefaults.swift */; };
 		06BACE3A233A0647007521F6 /* wkWebViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BACE39233A0647007521F6 /* wkWebViewExtension.swift */; };
 		06CEAE1E2344899800E9EF3C /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE182344899800E9EF3C /* ProfilePresenter.swift */; };
@@ -49,8 +47,6 @@
 		06CEAE232344899800E9EF3C /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE1D2344899800E9EF3C /* ProfileInteractor.swift */; };
 		06CEAE25234491C400E9EF3C /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06CEAE24234491C400E9EF3C /* ProfileViewController.xib */; };
 		06CEAE28234496A400E9EF3C /* ManagerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEAE27234496A400E9EF3C /* ManagerParser.swift */; };
-		06D766DF232F476B00316C72 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D766DD232F476B00316C72 /* DashboardViewController.swift */; };
-		06D766E0232F476B00316C72 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D766DE232F476B00316C72 /* DashboardViewController.xib */; };
 		06D766E2232F793600316C72 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D766E1232F793600316C72 /* LabelExtension.swift */; };
 		06D766E6232F85D000316C72 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D766E4232F85D000316C72 /* ExploreViewController.swift */; };
 		06D766E7232F85D000316C72 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D766E5232F85D000316C72 /* ExploreViewController.xib */; };
@@ -59,8 +55,25 @@
 		06E6FD5D233C67B60006D0A0 /* NetworkHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6FD5C233C67B60006D0A0 /* NetworkHeader.swift */; };
 		06E6FD5F233C76E20006D0A0 /* NetworkPlugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6FD5E233C76E20006D0A0 /* NetworkPlugins.swift */; };
 		06E6FD61233CB8D40006D0A0 /* AuthCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6FD60233CB8D40006D0A0 /* AuthCompletion.swift */; };
-		06E6FD64233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6FD62233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift */; };
-		06E6FD65233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E6FD63233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib */; };
+		06E80A7523459D3E005F8275 /* DashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A6F23459D3E005F8275 /* DashboardPresenter.swift */; };
+		06E80A7623459D3E005F8275 /* DashboardWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A7023459D3E005F8275 /* DashboardWorker.swift */; };
+		06E80A7723459D3E005F8275 /* DashboardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A7123459D3E005F8275 /* DashboardRouter.swift */; };
+		06E80A7823459D3E005F8275 /* DashboardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A7223459D3E005F8275 /* DashboardModels.swift */; };
+		06E80A7923459D3E005F8275 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A7323459D3E005F8275 /* DashboardViewController.swift */; };
+		06E80A7A23459D3E005F8275 /* DashboardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A7423459D3E005F8275 /* DashboardInteractor.swift */; };
+		06E80A7C23459D56005F8275 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E80A7B23459D56005F8275 /* DashboardViewController.xib */; };
+		06E80A8423459DF0005F8275 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A7E23459DF0005F8275 /* LoginPresenter.swift */; };
+		06E80A8523459DF0005F8275 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A7F23459DF0005F8275 /* LoginWorker.swift */; };
+		06E80A8623459DF0005F8275 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A8023459DF0005F8275 /* LoginRouter.swift */; };
+		06E80A8723459DF0005F8275 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A8123459DF0005F8275 /* LoginModels.swift */; };
+		06E80A8823459DF0005F8275 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A8223459DF0005F8275 /* LoginViewController.swift */; };
+		06E80A8923459DF0005F8275 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A8323459DF0005F8275 /* LoginInteractor.swift */; };
+		06E80A8B23459EEB005F8275 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E80A8A23459EEB005F8275 /* LoginViewController.xib */; };
+		06E80A8E23459F97005F8275 /* LoginWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A8D23459F97005F8275 /* LoginWebView.swift */; };
+		06E80A912345D680005F8275 /* DashboardTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A902345D680005F8275 /* DashboardTabBarViewController.swift */; };
+		06E80A932345EA78005F8275 /* MoyaExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A922345EA78005F8275 /* MoyaExtension.swift */; };
+		06E80A972345FDB2005F8275 /* DashboardImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80A952345FDB2005F8275 /* DashboardImageTableViewCell.swift */; };
+		06E80A982345FDB2005F8275 /* DashboardImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E80A962345FDB2005F8275 /* DashboardImageTableViewCell.xib */; };
 		06ED866F23320904003C0D21 /* EnchanterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ED866E23320904003C0D21 /* EnchanterViewController.swift */; };
 		06ED86712332091F003C0D21 /* EnchanterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06ED86702332091F003C0D21 /* EnchanterViewController.xib */; };
 		77B4746307FCB135F59EF3A1 /* Pods_Training_AdliTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB70BAE995D39899781F93C /* Pods_Training_AdliTests.framework */; };
@@ -122,8 +135,6 @@
 		064BB21623432B2F00392C57 /* BenzierPathExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenzierPathExtensions.swift; sourceTree = "<group>"; };
 		064BB21823432B9C00392C57 /* SVGCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGCanvasView.swift; sourceTree = "<group>"; };
 		06911A36233DB59C0017DF60 /* ConstantColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantColor.swift; sourceTree = "<group>"; };
-		06911A38233DBD010017DF60 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
-		06911A39233DBD010017DF60 /* WebViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewViewController.xib; sourceTree = "<group>"; };
 		06911A3C233DE9490017DF60 /* ConstantDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantDefaults.swift; sourceTree = "<group>"; };
 		06BACE39233A0647007521F6 /* wkWebViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wkWebViewExtension.swift; sourceTree = "<group>"; };
 		06CEAE182344899800E9EF3C /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
@@ -134,8 +145,6 @@
 		06CEAE1D2344899800E9EF3C /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		06CEAE24234491C400E9EF3C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		06CEAE27234496A400E9EF3C /* ManagerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerParser.swift; sourceTree = "<group>"; };
-		06D766DD232F476B00316C72 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		06D766DE232F476B00316C72 /* DashboardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
 		06D766E1232F793600316C72 /* LabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
 		06D766E4232F85D000316C72 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		06D766E5232F85D000316C72 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
@@ -144,8 +153,25 @@
 		06E6FD5C233C67B60006D0A0 /* NetworkHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHeader.swift; sourceTree = "<group>"; };
 		06E6FD5E233C76E20006D0A0 /* NetworkPlugins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPlugins.swift; sourceTree = "<group>"; };
 		06E6FD60233CB8D40006D0A0 /* AuthCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCompletion.swift; sourceTree = "<group>"; };
-		06E6FD62233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashLoginCostumCredentialViewController.swift; sourceTree = "<group>"; };
-		06E6FD63233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnsplashLoginCostumCredentialViewController.xib; sourceTree = "<group>"; };
+		06E80A6F23459D3E005F8275 /* DashboardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardPresenter.swift; sourceTree = "<group>"; };
+		06E80A7023459D3E005F8275 /* DashboardWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardWorker.swift; sourceTree = "<group>"; };
+		06E80A7123459D3E005F8275 /* DashboardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardRouter.swift; sourceTree = "<group>"; };
+		06E80A7223459D3E005F8275 /* DashboardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModels.swift; sourceTree = "<group>"; };
+		06E80A7323459D3E005F8275 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		06E80A7423459D3E005F8275 /* DashboardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInteractor.swift; sourceTree = "<group>"; };
+		06E80A7B23459D56005F8275 /* DashboardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
+		06E80A7E23459DF0005F8275 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		06E80A7F23459DF0005F8275 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		06E80A8023459DF0005F8275 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		06E80A8123459DF0005F8275 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
+		06E80A8223459DF0005F8275 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		06E80A8323459DF0005F8275 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		06E80A8A23459EEB005F8275 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		06E80A8D23459F97005F8275 /* LoginWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebView.swift; sourceTree = "<group>"; };
+		06E80A902345D680005F8275 /* DashboardTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabBarViewController.swift; sourceTree = "<group>"; };
+		06E80A922345EA78005F8275 /* MoyaExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaExtension.swift; sourceTree = "<group>"; };
+		06E80A952345FDB2005F8275 /* DashboardImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardImageTableViewCell.swift; sourceTree = "<group>"; };
+		06E80A962345FDB2005F8275 /* DashboardImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardImageTableViewCell.xib; sourceTree = "<group>"; };
 		06ED866E23320904003C0D21 /* EnchanterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnchanterViewController.swift; sourceTree = "<group>"; };
 		06ED86702332091F003C0D21 /* EnchanterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnchanterViewController.xib; sourceTree = "<group>"; };
 		07DC9CB32F5B13AED3EF9F29 /* Pods-Training-AdliUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Training-AdliUITests.debug.xcconfig"; path = "Target Support Files/Pods-Training-AdliUITests/Pods-Training-AdliUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -245,11 +271,12 @@
 		0622394023289C830095BC7B /* scene */ = {
 			isa = PBXGroup;
 			children = (
+				06E80A7D23459DDA005F8275 /* Login */,
+				06E80A6E23459CB5005F8275 /* Dashboard */,
 				06CEAE172344897700E9EF3C /* Profile */,
 				064BB2112343278D00392C57 /* SVGController */,
 				06ED866D233208D6003C0D21 /* Investchanter */,
 				06D766E3232F85AB00316C72 /* Explore */,
-				06D766DC232F474000316C72 /* Dashboard */,
 				0622395F2328CEA50095BC7B /* BaseViewController */,
 			);
 			path = scene;
@@ -277,6 +304,7 @@
 				06325FC42334C4C3006D67C3 /* DataExtensions.swift */,
 				06BACE39233A0647007521F6 /* wkWebViewExtension.swift */,
 				064BB21623432B2F00392C57 /* BenzierPathExtensions.swift */,
+				06E80A922345EA78005F8275 /* MoyaExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -354,13 +382,6 @@
 			path = SVGController;
 			sourceTree = "<group>";
 		};
-		06CEAE16234488C100E9EF3C /* Dashboard */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Dashboard;
-			sourceTree = "<group>";
-		};
 		06CEAE172344897700E9EF3C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,20 +404,6 @@
 			path = ParseManager;
 			sourceTree = "<group>";
 		};
-		06D766DC232F474000316C72 /* Dashboard */ = {
-			isa = PBXGroup;
-			children = (
-				06CEAE16234488C100E9EF3C /* Dashboard */,
-				06D766DD232F476B00316C72 /* DashboardViewController.swift */,
-				06D766DE232F476B00316C72 /* DashboardViewController.xib */,
-				06E6FD62233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift */,
-				06E6FD63233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib */,
-				06911A38233DBD010017DF60 /* WebViewViewController.swift */,
-				06911A39233DBD010017DF60 /* WebViewViewController.xib */,
-			);
-			path = Dashboard;
-			sourceTree = "<group>";
-		};
 		06D766E3232F85AB00316C72 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +413,62 @@
 				06D766EA232F868200316C72 /* ExploreTableViewCell.xib */,
 			);
 			path = Explore;
+			sourceTree = "<group>";
+		};
+		06E80A6E23459CB5005F8275 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				06E80A942345FD8A005F8275 /* DashboardImageCell */,
+				06E80A8F2345D647005F8275 /* DashboardTabbar */,
+				06E80A6F23459D3E005F8275 /* DashboardPresenter.swift */,
+				06E80A7023459D3E005F8275 /* DashboardWorker.swift */,
+				06E80A7123459D3E005F8275 /* DashboardRouter.swift */,
+				06E80A7223459D3E005F8275 /* DashboardModels.swift */,
+				06E80A7323459D3E005F8275 /* DashboardViewController.swift */,
+				06E80A7423459D3E005F8275 /* DashboardInteractor.swift */,
+				06E80A7B23459D56005F8275 /* DashboardViewController.xib */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		06E80A7D23459DDA005F8275 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				06E80A8C23459F67005F8275 /* WebView */,
+				06E80A7E23459DF0005F8275 /* LoginPresenter.swift */,
+				06E80A7F23459DF0005F8275 /* LoginWorker.swift */,
+				06E80A8023459DF0005F8275 /* LoginRouter.swift */,
+				06E80A8123459DF0005F8275 /* LoginModels.swift */,
+				06E80A8223459DF0005F8275 /* LoginViewController.swift */,
+				06E80A8323459DF0005F8275 /* LoginInteractor.swift */,
+				06E80A8A23459EEB005F8275 /* LoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		06E80A8C23459F67005F8275 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				06E80A8D23459F97005F8275 /* LoginWebView.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		06E80A8F2345D647005F8275 /* DashboardTabbar */ = {
+			isa = PBXGroup;
+			children = (
+				06E80A902345D680005F8275 /* DashboardTabBarViewController.swift */,
+			);
+			path = DashboardTabbar;
+			sourceTree = "<group>";
+		};
+		06E80A942345FD8A005F8275 /* DashboardImageCell */ = {
+			isa = PBXGroup;
+			children = (
+				06E80A952345FDB2005F8275 /* DashboardImageTableViewCell.swift */,
+				06E80A962345FDB2005F8275 /* DashboardImageTableViewCell.xib */,
+			);
+			path = DashboardImageCell;
 			sourceTree = "<group>";
 		};
 		06ED866D233208D6003C0D21 /* Investchanter */ = {
@@ -549,16 +612,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06E6FD65233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.xib in Resources */,
 				06D766E7232F85D000316C72 /* ExploreViewController.xib in Resources */,
 				064BB215234327D600392C57 /* SVGViewController.xib in Resources */,
-				06911A3B233DBD010017DF60 /* WebViewViewController.xib in Resources */,
 				06D766EB232F868200316C72 /* ExploreTableViewCell.xib in Resources */,
+				06E80A7C23459D56005F8275 /* DashboardViewController.xib in Resources */,
+				06E80A982345FDB2005F8275 /* DashboardImageTableViewCell.xib in Resources */,
 				0622391D23289C3F0095BC7B /* LaunchScreen.storyboard in Resources */,
 				06ED86712332091F003C0D21 /* EnchanterViewController.xib in Resources */,
 				0622391A23289C3F0095BC7B /* Assets.xcassets in Resources */,
 				06CEAE25234491C400E9EF3C /* ProfileViewController.xib in Resources */,
-				06D766E0232F476B00316C72 /* DashboardViewController.xib in Resources */,
+				06E80A8B23459EEB005F8275 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,37 +749,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E80A8923459DF0005F8275 /* LoginInteractor.swift in Sources */,
+				06E80A8423459DF0005F8275 /* LoginPresenter.swift in Sources */,
 				06325FB42334A9FC006D67C3 /* NetworkManager.swift in Sources */,
+				06E80A7923459D3E005F8275 /* DashboardViewController.swift in Sources */,
+				06E80A972345FDB2005F8275 /* DashboardImageTableViewCell.swift in Sources */,
 				06ED866F23320904003C0D21 /* EnchanterViewController.swift in Sources */,
 				06D766E2232F793600316C72 /* LabelExtension.swift in Sources */,
 				06325FC52334C4C3006D67C3 /* DataExtensions.swift in Sources */,
-				06911A3A233DBD010017DF60 /* WebViewViewController.swift in Sources */,
 				06E6FD5F233C76E20006D0A0 /* NetworkPlugins.swift in Sources */,
 				062239672328DC930095BC7B /* ButtonExtension.swift in Sources */,
 				06D766E6232F85D000316C72 /* ExploreViewController.swift in Sources */,
+				06E80A8523459DF0005F8275 /* LoginWorker.swift in Sources */,
 				0622395B2328AC510095BC7B /* Entity+CoreDataProperties.swift in Sources */,
 				0622395E2328B29F0095BC7B /* PrintExtensions.swift in Sources */,
 				06E6FD61233CB8D40006D0A0 /* AuthCompletion.swift in Sources */,
+				06E80A7623459D3E005F8275 /* DashboardWorker.swift in Sources */,
 				06325FC02334BE58006D67C3 /* NetworkPath.swift in Sources */,
+				06E80A7523459D3E005F8275 /* DashboardPresenter.swift in Sources */,
 				062239692328DF790095BC7B /* ColorExtension.swift in Sources */,
+				06E80A912345D680005F8275 /* DashboardTabBarViewController.swift in Sources */,
 				062239632328CF310095BC7B /* CoreDataModel.swift in Sources */,
 				06D766E9232F867200316C72 /* ExploreTableViewCell.swift in Sources */,
 				06325FB72334AD55006D67C3 /* oauthModel.swift in Sources */,
+				06E80A7A23459D3E005F8275 /* DashboardInteractor.swift in Sources */,
 				0622394523289FC80095BC7B /* login_credenstial.xcdatamodeld in Sources */,
 				062239652328D1A50095BC7B /* EntityKName.swift in Sources */,
 				06CEAE28234496A400E9EF3C /* ManagerParser.swift in Sources */,
+				06E80A8823459DF0005F8275 /* LoginViewController.swift in Sources */,
 				06CEAE222344899800E9EF3C /* ProfileViewController.swift in Sources */,
-				06E6FD64233CBF660006D0A0 /* UnsplashLoginCostumCredentialViewController.swift in Sources */,
-				06D766DF232F476B00316C72 /* DashboardViewController.swift in Sources */,
+				06E80A7723459D3E005F8275 /* DashboardRouter.swift in Sources */,
 				06325FC32334BF53006D67C3 /* AuthWorker.swift in Sources */,
+				06E80A7823459D3E005F8275 /* DashboardModels.swift in Sources */,
+				06E80A8623459DF0005F8275 /* LoginRouter.swift in Sources */,
 				0622394B2328AAD30095BC7B /* loginCredenstialSwift.swift in Sources */,
 				06325FB92334AFCD006D67C3 /* oauthTokenModel.swift in Sources */,
 				06BACE3A233A0647007521F6 /* wkWebViewExtension.swift in Sources */,
 				06CEAE202344899800E9EF3C /* ProfileRouter.swift in Sources */,
 				06911A37233DB59C0017DF60 /* ConstantColor.swift in Sources */,
 				062239612328CEC10095BC7B /* BaseViewController.swift in Sources */,
+				06E80A8E23459F97005F8275 /* LoginWebView.swift in Sources */,
 				06E6FD5D233C67B60006D0A0 /* NetworkHeader.swift in Sources */,
 				0622395A2328AC510095BC7B /* Entity+CoreDataClass.swift in Sources */,
+				06E80A932345EA78005F8275 /* MoyaExtension.swift in Sources */,
 				0622391323289C3E0095BC7B /* AppDelegate.swift in Sources */,
 				0604502B2329005500EDD35B /* ViewExtension.swift in Sources */,
 				06CEAE232344899800E9EF3C /* ProfileInteractor.swift in Sources */,
@@ -725,6 +800,7 @@
 				06CEAE212344899800E9EF3C /* ProfileModels.swift in Sources */,
 				064BB214234327D600392C57 /* SVGViewController.swift in Sources */,
 				064BB21923432B9C00392C57 /* SVGCanvasView.swift in Sources */,
+				06E80A8723459DF0005F8275 /* LoginModels.swift in Sources */,
 				06CEAE1F2344899800E9EF3C /* ProfileWorker.swift in Sources */,
 				06325FC72334CE9C006D67C3 /* HeimdallrNetwork.swift in Sources */,
 				06911A3D233DE9490017DF60 /* ConstantDefaults.swift in Sources */,

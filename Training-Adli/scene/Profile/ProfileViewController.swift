@@ -20,7 +20,22 @@ protocol ProfileDisplayLogic: class
 class ProfileViewController: UIViewController, ProfileDisplayLogic
 {
     // Outlets
-    @IBOutlet weak var imageProfile: UIImageView!
+    @IBOutlet weak var imageProfile: UIImageView! {
+        didSet{
+            imageProfile.circleRadius()
+            imageProfile.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var imageCollectionPrimary : UIImageView!
+    @IBOutlet weak var imageCollectionSecondaryOne : UIImageView!
+    @IBOutlet weak var imageCollectionSecondaryTwo : UIImageView!
+    @IBOutlet weak var imageCollectionViewHolder : UIView! {
+        didSet {
+            imageCollectionViewHolder.constantRadius()
+            imageCollectionViewHolder.setShadow()
+        }
+    }
+    
     @IBOutlet weak var usernameProfile: UILabel!
     @IBOutlet weak var followersCountProfile: UILabel!
     @IBOutlet weak var collectionsCountProfile: UILabel!

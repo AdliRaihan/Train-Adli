@@ -23,7 +23,7 @@ extension UIView {
     }
     
     // default shadows
-    func setShadow (withColor color : UIColor = .black,Opacity opacity : Float = 0.2) {
+    func setShadow (withColor color : UIColor = .black,Opacity opacity : Float = 0.095) {
         layer.masksToBounds = false
         layer.shadowColor = color.cgColor
         layer.shadowOpacity = opacity

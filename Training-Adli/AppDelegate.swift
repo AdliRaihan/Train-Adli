@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftyUserDefaults
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -82,7 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     private func setupNewRootController () {
         let rootController : UINavigationController  = UINavigationController.init(nibName: nil, bundle: nil)
-        rootController.viewControllers = [DashboardViewController.init(nibName: "DashboardViewController", bundle: nil)]
+        
+        rootController.viewControllers = [LoginViewController.init(nibName: "LoginViewController", bundle: nil)]
         
         rootController.navigationBar.barStyle = .black
         rootController.navigationBar.tintColor = UIColor.white
@@ -90,7 +92,15 @@ extension AppDelegate {
         
         if let _window = window {
             "AppDelegate".createMessage( message: "Initialize Root View Controller" )
-            _window.rootViewController = rootController
+            
+            if Defaults[.userAuthenticationCode].isEmpty {
+                _window.rootViewController = rootController
+            } else {
+                let otherRoot = UINavigationController.init(rootViewController: DashboardTabBarViewController())
+                otherRoot.setNavigationBarHidden(true, animated: false)
+                
+                _window.rootViewController = otherRoot
+            }
         }
     }
 }

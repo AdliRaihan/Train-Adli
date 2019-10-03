@@ -15,13 +15,17 @@ let trainProvider = MoyaProvider<trainServices>(plugins: [NetworkPlugins(),authP
 enum trainServices {
     case oauth (request : unsplash.AuthRequest)
     case oatuhAccessToken (request : unsplash.oauthTokenModel.tokenRequest)
+    case getPhotos (request : Dashboard.getPhotos.request)
     case getProfile ()
 }
 
 
 extension trainServices : TargetType , AccessTokenAuthorizable {
     var baseURL: URL {
-        return URL.init(string: ConstantVariables.baseURLAuth)!
+        switch self {
+        case .oatuhAccessToken: return URL.init(string: ConstantVariables.baseURL)!
+        default : return URL.init(string: ConstantVariables.baseURLAuth)!
+        }
     }
     
     var method: Moya.Method {

@@ -13,7 +13,7 @@ import SwiftyUserDefaults
 class ConstantVariables {
     
     static var get = ConstantVariables()
-    static var baseURL = ""
+    static var baseURL = "https://unsplash.com/"
     static var baseURLAuth = "https://api.unsplash.com/"
     static var urlToGetAuthorization = "https://unsplash.com/oauth/authorize?client_id=158e22d2be6cab776308c3250270a395cc2813ca8346c59643b949a4c68ae513&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=public+read_user"
     
