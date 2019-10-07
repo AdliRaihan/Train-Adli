@@ -9,17 +9,25 @@
 import Foundation
 import UIKit
 
-
 extension UIView {
     
     // Make curve from view
-    func constantRadius () {
+    func constantRadius (withBorder : Bool = false) {
         layer.cornerRadius = 5
+        
+        if withBorder {
+            layer.borderColor = UIColor.gray.cgColor.copy(alpha: 0.25)
+            layer.borderWidth = 1
+        }
     }
     
     // circle (____)
-    func circleRadius () {
+    func circleRadius (withBorder : Bool = false) {
         layer.cornerRadius = frame.height / 2
+        if withBorder {
+            layer.borderColor = UIColor.gray.cgColor.copy(alpha: 0.25)
+            layer.borderWidth = 1
+        }
     }
     
     // default shadows
@@ -28,7 +36,7 @@ extension UIView {
         layer.shadowColor = color.cgColor
         layer.shadowOpacity = opacity
         layer.shadowOffset = .zero
-        layer.shadowRadius = 5
+        layer.shadowRadius = 1
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
     }

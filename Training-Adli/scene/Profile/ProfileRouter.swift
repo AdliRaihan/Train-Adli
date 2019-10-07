@@ -15,6 +15,7 @@ import UIKit
 @objc protocol ProfileRoutingLogic
 {
     //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToLogout()
 }
 
 protocol ProfileDataPassing
@@ -29,5 +30,18 @@ class ProfileRouter: NSObject, ProfileRoutingLogic, ProfileDataPassing
     
     // MARK: Routing
     
+    func routeToLogout() {
+        navigateToLogout(source: viewController!)
+    }
+    
+    // navigate
+    private func navigateToLogout(source : ProfileViewController) {
+        let newRoot = UINavigationController.init(rootViewController: LoginViewController())
+        if let _window = AppDelegate.shared.window {
+            newRoot.navigationController?.setToolbarHidden(true, animated: false)
+            _window.rootViewController = newRoot
+        }
+        source.show(newRoot, sender: nil)
+    }
 }
 

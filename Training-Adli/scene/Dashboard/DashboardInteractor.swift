@@ -17,6 +17,7 @@ import Moya
 protocol DashboardBusinessLogic
 {
     func getAllPhotos()
+    func setLikedPhoto(_id : String)
 }
 
 protocol DashboardDataStore
@@ -42,6 +43,7 @@ class DashboardInteractor: DashboardBusinessLogic, DashboardDataStore
             switch result {
             case .success(let data):
                 do {
+                    " Message Response ".createMessage(message: try data.mapString())
                     let mapArray : [NSDictionary] = try data.mapArrayJSON() as! [NSDictionary]
                     var mapResult : [Dashboard.getPhotos.response] = []
                     guard mapArray.count > 0 else { return }
@@ -53,10 +55,31 @@ class DashboardInteractor: DashboardBusinessLogic, DashboardDataStore
                     }
                     self.presenter?.presentToShowPhotos(response: mapResult)
                 } catch (let error ) {
-                    
+                    self.presenter?.presentToFailed(message: error.localizedDescription)
                 }
                 break
             case .error(let error):
+                self.presenter?.presentToFailed(message: error)
+                break
+            }
+        }
+    }
+    
+    func setLikedPhoto(_id : String) {
+        "Liked Photos Task".createMessage(message: "Successfully!")
+        let request = Dashboard.likePhotos.request()
+        request.id = _id
+        DashboardWorker.init().setLikePhotos(request: request) { (result) in
+            switch result {
+            case .success(let data):
+                do {
+                    "Message".createMessage(message: try data.mapString())
+                } catch (let error) {
+                    self.presenter?.presentToFailed(message: error.localizedDescription)
+                }
+                break
+            case .error(let error):
+                self.presenter?.presentToFailed(message: error)
                 break
             }
         }

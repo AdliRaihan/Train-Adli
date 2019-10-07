@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DashboardViewController" customModule="Training_Adli" customModuleProvider="target">
             <connections>
                 <outlet property="imageHolderDashboard" destination="oLK-kf-7Rj" id="mNH-WN-Sig"/>
+                <outlet property="searchTextField" destination="Awa-UJ-sQ3" id="Ll7-j6-i7w"/>
                 <outlet property="tableView" destination="ugp-Pl-dXw" id="E2b-hw-r9r"/>
                 <outlet property="view" destination="iN0-l3-epB" id="T2E-wq-veG"/>
                 <outlet property="viewConstraintValue" destination="703-XW-dRf" id="L2x-cH-QkH"/>
@@ -32,12 +33,25 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jen-ey-DR5">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_pinterest" translatesAutoresizingMaskIntoConstraints="NO" id="oLK-kf-7Rj">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oLK-kf-7Rj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MUK-Ih-X9u">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                                            <color key="backgroundColor" red="0.15888721446700504" green="0.15888721446700504" blue="0.15888721446700504" alpha="0.70256314212328763" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJb-Uj-zIb">
+                                                    <rect key="frame" x="5" y="5" width="365" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" red="0.85818461540000002" green="0.2063823189" blue="0.26314093259999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.15888721446700504" green="0.15888721446700504" blue="0.15888721446700504" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="yJb-Uj-zIb" firstAttribute="top" secondItem="MUK-Ih-X9u" secondAttribute="top" constant="5" id="Lsk-bZ-7H1"/>
+                                                <constraint firstAttribute="trailing" secondItem="yJb-Uj-zIb" secondAttribute="trailing" constant="5" id="Ogv-bn-tYt"/>
+                                                <constraint firstItem="yJb-Uj-zIb" firstAttribute="leading" secondItem="MUK-Ih-X9u" secondAttribute="leading" constant="5" id="lrC-TF-NQg"/>
+                                            </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKZ-fk-i9w">
                                             <rect key="frame" x="25" y="50" width="325" height="150"/>
@@ -65,16 +79,25 @@ Powered by creators everywhere.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.25" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trends Tags : Nature , Street , Vibe , programming , technology" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92m-Tt-bHA">
+                                                    <rect key="frame" x="10" y="112.5" width="305" height="12"/>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Awa-UJ-sQ3" secondAttribute="trailing" constant="5" id="0x5-8R-0Ei"/>
+                                                <constraint firstAttribute="trailing" secondItem="92m-Tt-bHA" secondAttribute="trailing" constant="10" id="7eW-bZ-Oe0"/>
                                                 <constraint firstItem="Awa-UJ-sQ3" firstAttribute="centerY" secondItem="nKZ-fk-i9w" secondAttribute="centerY" constant="15" id="FnU-3T-6zL"/>
                                                 <constraint firstItem="NJc-ly-nzy" firstAttribute="top" secondItem="QS9-ie-6dl" secondAttribute="bottom" constant="5" id="KmU-08-cK0"/>
                                                 <constraint firstItem="Awa-UJ-sQ3" firstAttribute="leading" secondItem="nKZ-fk-i9w" secondAttribute="leading" constant="5" id="Oeo-gF-ipy"/>
                                                 <constraint firstAttribute="trailing" secondItem="NJc-ly-nzy" secondAttribute="trailing" constant="5" id="RrZ-2I-RfD"/>
                                                 <constraint firstItem="Awa-UJ-sQ3" firstAttribute="centerX" secondItem="nKZ-fk-i9w" secondAttribute="centerX" id="SMS-6R-NXM"/>
+                                                <constraint firstItem="92m-Tt-bHA" firstAttribute="leading" secondItem="nKZ-fk-i9w" secondAttribute="leading" constant="10" id="UL3-K6-7UR"/>
                                                 <constraint firstItem="QS9-ie-6dl" firstAttribute="top" secondItem="nKZ-fk-i9w" secondAttribute="top" constant="5" id="cGa-59-a2Z"/>
+                                                <constraint firstItem="92m-Tt-bHA" firstAttribute="top" secondItem="Awa-UJ-sQ3" secondAttribute="bottom" constant="5" id="eGi-LQ-ZYt"/>
                                                 <constraint firstItem="NJc-ly-nzy" firstAttribute="leading" secondItem="nKZ-fk-i9w" secondAttribute="leading" constant="5" id="l03-4F-95g"/>
                                                 <constraint firstItem="QS9-ie-6dl" firstAttribute="leading" secondItem="nKZ-fk-i9w" secondAttribute="leading" constant="5" id="mbT-NQ-jkF"/>
                                             </constraints>
@@ -137,7 +160,4 @@ Powered by creators everywhere.</string>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>
     </objects>
-    <resources>
-        <image name="bg_pinterest" width="720" height="1280"/>
-    </resources>
 </document>

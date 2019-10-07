@@ -27,5 +27,19 @@ class DashboardWorker
             }
         }
     }
+    
+    func setLikePhotos ( request _request : Dashboard.likePhotos.request, completion _completion : @escaping (globalEnum) -> Void) {
+        trainProvider.request(trainServices.setActionLike(request: _request)) { (result) in
+            "Result".createMessage(message: result)
+            switch result {
+            case .success(let response):
+                _completion(.success(data: response))
+                break
+            case .failure(let error):
+                _completion(.error(error: error.localizedDescription))
+                break
+            }
+        }
+    }
 }
 

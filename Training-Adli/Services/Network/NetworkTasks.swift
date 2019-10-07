@@ -28,6 +28,10 @@ class NetworkTasks {
             // Get Photos
         case .getPhotos(let request):
             return .requestParameters(parameters: Dashboard.getPhotos.createParam(request: request), encoding: URLEncoding.default)
+            
+            // set Like Action
+        case .setActionLike(let request):
+            return .requestParameters(parameters: Dashboard.likePhotos.createParams(request: request), encoding: URLEncoding.default)
         }
     
     }

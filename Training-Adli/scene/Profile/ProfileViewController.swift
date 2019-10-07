@@ -11,6 +11,8 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
+import WebKit
 
 protocol ProfileDisplayLogic: class
 {
@@ -35,6 +37,11 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
             imageCollectionViewHolder.setShadow()
         }
     }
+    @IBOutlet weak var menuSideHideGestureView : UIView!
+    @IBOutlet weak var menuSideButtonAction: UIImageView!
+    @IBOutlet weak var menuSidePositionLeft: NSLayoutConstraint!
+    @IBOutlet weak var menuSide: UIView!
+    @IBOutlet weak var menuSideLogout: UIButton!
     
     @IBOutlet weak var usernameProfile: UILabel!
     @IBOutlet weak var followersCountProfile: UILabel!
@@ -90,11 +97,42 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        setupUI()
+        setupIO()
         do_getProfile()
+    }
+    
+    
+    private func setupUI() {
+        menuSidePositionLeft.constant = -menuSide.frame.width
+        menuSideHideGestureView.isHidden = true
+    }
+    private func setupIO() {
+        menuSideButtonAction.isUserInteractionEnabled = true
+        menuSideButtonAction.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showSideBarMenu)))
+        menuSideHideGestureView.isUserInteractionEnabled = true
+        menuSideHideGestureView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hideSideBarMenu)))
     }
     
     private func do_getProfile() {
         interactor?.getProfile()
+    }
+    
+    @objc private func showSideBarMenu () {
+        menuSidePositionLeft.constant = 0
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+            self.menuSideHideGestureView.isHidden = false
+        }
+    }
+    
+    @objc private func hideSideBarMenu () {
+        "Hide".createMessage(message: "Success")
+        menuSidePositionLeft.constant = -menuSide.frame.width
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+            self.menuSideHideGestureView.isHidden = true
+        }
     }
     
     func displayToProfile(viewModel: Profile.privateProfile.viewModel) {
@@ -105,6 +143,15 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     }
     
     // MARK: Do something
+    @IBAction func buttonLogoutAction(_ sender: Any) {
+        Defaults[.userAuthenticationCode] = ""
+        WKWebView().clearCache()
+        self.router?.routeToLogout()
+    }
     
 }
 
+extension ProfileViewController  {
+    // Button Action
+    
+}

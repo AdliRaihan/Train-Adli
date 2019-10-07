@@ -16,7 +16,7 @@ class BaseViewController: UIViewController {
     var context : NSManagedObjectContext?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
     
     
@@ -47,7 +47,11 @@ class BaseViewController: UIViewController {
     }
     
     func showLoading (_ message : String ) {
-        SVProgressHUD.show(withStatus: message)
+        if message == "" {
+            SVProgressHUD.show()
+        } else {
+            SVProgressHUD.show(withStatus: message)
+        }
     }
     
     func hideLoading (_ message : String ) {

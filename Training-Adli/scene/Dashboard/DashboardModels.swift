@@ -24,8 +24,12 @@ enum Dashboard
         }
         
         struct tableViewModel {
+            var idsPhoto : [String] = []
             var modelImages : [String] = []
             var descriptionsImage : [String] = []
+            var usernameImage : [String] = []
+            var username : [String] = []
+            var likedByUser : [Int] = []
         }
         
         static func createParam (request : request) -> [String:Any] {
@@ -57,10 +61,11 @@ enum Dashboard
             var height : String?
             var color : String?
             var likes : Int?
-            var liked_by_user : Bool?
+            var liked_by_user : Int?
             var description : String?
             var link : responseLinks?
             var urls : responseUrls?
+            var user : responseUserInfo?
             
             init () {}
             required init?(map: Map) {}
@@ -68,8 +73,11 @@ enum Dashboard
                 id <- map["id"]
                 createdAt <- map["created_at"]
                 likes <- map["likes"]
+                description <- map["description"]
+                liked_by_user <- map["liked_by_user"]
                 link <- map["links"]
                 urls <- map["urls"]
+                user <- map["user"]
             }
         }
         
@@ -104,6 +112,67 @@ enum Dashboard
                 _regular <- map["regular"]
                 _small <- map["small"]
                 _thumb <- map["thumb"]
+            }
+        }
+        
+        class responseUserInfo : Mappable {
+            
+            var username : String?
+            var profileImage : responseProfileImage?
+            
+            init () {}
+            required init?(map: Map) {}
+            func mapping(map: Map) {
+                username <- map["username"]
+                profileImage <- map["profile_image"]
+            }
+        }
+        
+        class responseProfileImage : Mappable {
+            
+            var _large : String?
+            var _medium : String?
+            var _small : String?
+            
+            init() {}
+            required init?(map: Map) {}
+            
+            func mapping(map: Map) {
+                _large <- map["large"]
+                _medium <- map["medium"]
+                _small <- map["small"]
+            }
+        }
+    }
+    
+    
+    enum likePhotos {
+        struct viewModel {
+        }
+        
+        static func createParams (request : request) -> [String:Any] {
+            return request.toJSON()
+        }
+        
+        class request : Mappable {
+            
+            var id : String? // ID Photo
+            
+            init(){}
+            required init?(map: Map) {}
+            func mapping(map: Map) {
+                id <- map["id"]
+            }
+            
+        }
+        
+        class response : Mappable {
+            
+            init() {}
+            required init?(map: Map) {}
+            
+            func mapping(map: Map) {
+                // nati ini harus di isi ya kawan kawan
             }
         }
     }

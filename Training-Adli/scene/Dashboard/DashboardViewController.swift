@@ -15,11 +15,13 @@ import UIKit
 protocol DashboardDisplayLogic: class
 {
     func displayToShowPhotos(_response : Dashboard.getPhotos.viewModel)
+    func displayError (message : String)
 }
 
-class DashboardViewController: UIViewController, DashboardDisplayLogic
+class DashboardViewController: BaseViewController, DashboardDisplayLogic
 {
     
+    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imageHolderDashboard: UIImageView!
     @IBOutlet weak var viewConstraintValue: NSLayoutConstraint!
@@ -79,7 +81,20 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic
     }
     
     private func setupUI(){
+        setupTextField()
         setupTableView()
+    }
+    
+    private func setupTextField () {
+        let viewImage = UIView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
+        let imgView = UIImageView.init(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
+        let image = UIImage.init(named: "ic_search")!.withRenderingMode(.alwaysTemplate)
+        imgView.tintColor = UIColor.gray
+        imgView.image = image
+        
+        viewImage.addSubview(imgView)
+        self.searchTextField.leftViewMode = .always
+        self.searchTextField.leftView = viewImage
     }
     
     private func setupTableView () {
@@ -89,6 +104,8 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic
     }
     
     private func setupInteractor () {
+        self.showLoading("")
+        "Token Access".createMessage(message: ConstantVariables.accessToken)
         interactor?.getAllPhotos()
     }
     
@@ -97,11 +114,21 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic
         imageHolderDashboard.kf.setImage(with: URL.init(string: _response.responsePrimary![1].urls!._regular ?? ""))
         
         for dataResponse in _response.responsePrimary! {
-            self.dsTableView.modelImages.append(dataResponse.urls!._small!)
+            self.dsTableView.modelImages.append(dataResponse.urls!._regular!)
+            self.dsTableView.descriptionsImage.append(dataResponse.description ?? "No Description" )
+            self.dsTableView.username.append(dataResponse.user!.username!)
+            self.dsTableView.usernameImage.append(dataResponse.user!.profileImage!._small!)
+            self.dsTableView.idsPhoto.append(dataResponse.id!)
+            self.dsTableView.likedByUser.append(dataResponse.liked_by_user!)
         }
         
         self.tableView.reloadData()
     }
+    
+    func displayError(message: String) {
+        self.showAlert(_message: message)
+    }
+    
 }
 
 extension DashboardViewController : UITableViewDelegate , UITableViewDataSource {
@@ -110,18 +137,63 @@ extension DashboardViewController : UITableViewDelegate , UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.hideLoading("")
         let nib = UINib.init(nibName: "DashboardImageTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "imageCell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell") as? DashboardImageTableViewCell
-        cell?.imageCell.kf.setImage(with: URL.init(string: self.dsTableView.modelImages[indexPath.row])!)
-        "table view initial".createMessage(message: "initial")
-        return cell!
+        return initializeCell(cell ?? UITableViewCell(), row: indexPath.row)
+    }
+    
+    private func initializeCell (_ cell : UITableViewCell , row : Int) -> UITableViewCell {
+        if let _cell = cell as? DashboardImageTableViewCell {
+            _cell.imageCell.kf.setImage(with: URL.init(string: self.dsTableView.modelImages[row])!)
+            _cell.usernameLabel.text = self.dsTableView.username[row]
+            _cell.imageProfileCell.kf.setImage(with: URL.init(string: self.dsTableView.usernameImage[row])!)
+            _cell.descriptionLabel.text = self.dsTableView.descriptionsImage[row]
+            // Initialze Data
+            _cell.datastore.id = self.dsTableView.idsPhoto[row]
+            _cell.datastore.isLikedByUser = self.dsTableView.likedByUser[row]
+            
+            if self.dsTableView.likedByUser[row] == 1 {
+                _cell.likedByUser()
+            } else {
+                _cell.unlikedByUser()
+            }
+            
+            _cell.idDelegate = self
+            return _cell
+        }
+        return cell
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        self.viewConstraintValue.constant = CGFloat(500 * self.dsTableView.modelImages.count) - UIScreen.main.bounds.height / 2 
+        self.viewConstraintValue.constant = CGFloat(500 * self.dsTableView.modelImages.count) - UIScreen.main.bounds.height / 1.65
         return 500.0
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        if let _cell = cell as? DashboardImageTableViewCell {
+//            "Cell Selected".createMessage(message: _cell.datastore.id!)
+        }
+    }
 }
+
+extension DashboardViewController : dashboardCellImageDelegate {
+    func _didLike(id: String) {
+//        "Image Loved at ID".createMessage(message: id)
+        _createAddQueueTasks(id)
+    }
+    
+    private func _createAddQueueTasks (_ ids : String) {
+        DispatchQueue.global(qos: .background).async {
+            let queued = DispatchQueue.init(label: "REQUEST_FOR_LIKED_PHOTOS_TEST:DEV - ADLI")
+            queued.async {
+                "From : \(queued.label)".createMessage(message: ids)
+                self.interactor?.setLikedPhoto(_id: ids)
+            }
+        }
+    }
+}
+

@@ -31,7 +31,7 @@ class DashboardPresenter: DashboardPresentationLogic
     
     // Show when failed to load images
     func presentToFailed(message: String) {
-        
+        viewController?.displayError(message: message)
     }
 }
 

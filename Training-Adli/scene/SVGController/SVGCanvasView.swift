@@ -26,18 +26,18 @@ class SVGCanvasView: UIView {
         let simPath = UIBezierPath.init()
         guard self == self else { return }
         
-        for i in 0..<self.targetGraph.count {
-            let CGPTitik = CGPoint.init(x: titikGraph[i].pointX, y: titikGraph[i].pointY)
-            let CGPTarget = CGPoint.init(x: targetGraph[i].pointX, y: targetGraph[i].pointY)
-            simPath.move(to: CGPTitik)
-            simPath.addLine(to: CGPTarget)
+        for _ in 0..<self.targetGraph.count {
+            
+            simPath.move(to: CGPoint(x: -5, y: 157))
+            simPath.addQuadCurve(to: CGPoint(x: self.frame.width / 2, y: 157),
+                                 controlPoint: CGPoint(x: self.frame.width / 4, y: 95))
+            simPath.addQuadCurve(to: CGPoint(x: self.frame.width , y: 157), controlPoint: CGPoint(x: (self.frame.width - (self.frame.width / 4)) , y: (157 + 62)))
+            
         }
         
         simPath.lineWidth = 2
-        simPath.close()
         UIColor.darkGray.set()
         simPath.stroke()
-        simPath.fill()
         setNeedsDisplay()
         
         "Draw".createMessage(message: "Success!")

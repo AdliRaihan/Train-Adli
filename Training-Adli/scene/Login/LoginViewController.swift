@@ -83,7 +83,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic
     func displayCodeAuthentication(viewModel : Login.authenticationCode) {
         Defaults[.userAuthenticationCode] = viewModel.code ?? ""
         if Defaults[.userAuthenticationCode] != "" {
-            
+            self.router?.routeToDashboard()
         }
     }
     // when auth api given failed

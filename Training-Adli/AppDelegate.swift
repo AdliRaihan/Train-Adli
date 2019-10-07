@@ -83,7 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     private func setupNewRootController () {
         let rootController : UINavigationController  = UINavigationController.init(nibName: nil, bundle: nil)
-        
         rootController.viewControllers = [LoginViewController.init(nibName: "LoginViewController", bundle: nil)]
         
         rootController.navigationBar.barStyle = .black
@@ -94,6 +93,8 @@ extension AppDelegate {
             "AppDelegate".createMessage( message: "Initialize Root View Controller" )
             
             if Defaults[.userAuthenticationCode].isEmpty {
+                rootController.navigationController?.setToolbarHidden(true, animated: false)
+                
                 _window.rootViewController = rootController
             } else {
                 let otherRoot = UINavigationController.init(rootViewController: DashboardTabBarViewController())
@@ -101,6 +102,14 @@ extension AppDelegate {
                 
                 _window.rootViewController = otherRoot
             }
+        }
+    }
+    
+    private func manualRoot () {
+        let otherRoot = UINavigationController.init(rootViewController: DashboardTabBarViewController())
+        otherRoot.setNavigationBarHidden(true, animated: false)
+        if let _window = window {
+            _window.rootViewController = otherRoot
         }
     }
 }

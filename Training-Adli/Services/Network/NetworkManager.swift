@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 import Moya
 
-let authPlugin = AccessTokenPlugin.init(tokenClosure: ConstantVariables.accessToken)
+let authPlugin = AccessTokenPlugin.init(tokenClosure: Defaults[.userAuthenticationCode])
 let trainProvider = MoyaProvider<trainServices>(plugins: [NetworkPlugins(),authPlugin])
 
 enum trainServices {
@@ -17,6 +18,9 @@ enum trainServices {
     case oatuhAccessToken (request : unsplash.oauthTokenModel.tokenRequest)
     case getPhotos (request : Dashboard.getPhotos.request)
     case getProfile ()
+    
+    
+    case setActionLike (request : Dashboard.likePhotos.request)
 }
 
 
@@ -30,7 +34,7 @@ extension trainServices : TargetType , AccessTokenAuthorizable {
     
     var method: Moya.Method {
         switch self {
-        case .oatuhAccessToken : return .post
+        case .oatuhAccessToken,.setActionLike : return .post
         default: return .get
         }
     }

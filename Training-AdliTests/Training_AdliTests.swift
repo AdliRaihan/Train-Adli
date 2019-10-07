@@ -9,14 +9,20 @@
 import XCTest
 @testable import Training_Adli
 
+var dashboard : DashboardViewController!
 class Training_AdliTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        dashboard = DashboardViewController()
+        dashboard.interactor?.getAllPhotos()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        dashboard = nil
+        super.tearDown()
     }
 
     func testExample() {

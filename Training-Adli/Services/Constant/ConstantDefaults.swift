@@ -13,5 +13,7 @@ extension DefaultsKeys {
     
     static var userAuthenticationCode : DefaultsKey<String> { return .init("authenticationcode",defaultValue: "")}
     
-    
+    class func removeCredentials () {
+        Defaults[.userAuthenticationCode] = ""
+    }
 }
