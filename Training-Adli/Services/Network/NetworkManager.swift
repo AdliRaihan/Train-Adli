@@ -19,8 +19,11 @@ enum trainServices {
     case getPhotos (request : Dashboard.getPhotos.request)
     case getProfile ()
     
-    
+    // POST
     case setActionLike (request : Dashboard.likePhotos.request)
+    
+    // DELETE
+    case setActionUnlike (request : Dashboard.likePhotos.request)
 }
 
 
@@ -34,6 +37,7 @@ extension trainServices : TargetType , AccessTokenAuthorizable {
     
     var method: Moya.Method {
         switch self {
+        case .setActionUnlike: return .delete
         case .oatuhAccessToken,.setActionLike : return .post
         default: return .get
         }

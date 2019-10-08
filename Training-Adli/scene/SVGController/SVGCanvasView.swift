@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 
 class SVGCanvasView: UIView {
     
@@ -17,31 +18,66 @@ class SVGCanvasView: UIView {
     
     var titikGraph : [chartPoint] = []
     var targetGraph : [chartPoint] = []
-
+    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
-        self.setPath()
-        let simPath = UIBezierPath.init()
         guard self == self else { return }
         
-        for _ in 0..<self.targetGraph.count {
-            
-            simPath.move(to: CGPoint(x: -5, y: 157))
-            simPath.addQuadCurve(to: CGPoint(x: self.frame.width / 2, y: 157),
-                                 controlPoint: CGPoint(x: self.frame.width / 4, y: 95))
-            simPath.addQuadCurve(to: CGPoint(x: self.frame.width , y: 157), controlPoint: CGPoint(x: (self.frame.width - (self.frame.width / 4)) , y: (157 + 62)))
-            
-        }
+        let simPath = linedPath()
+        let layerShapeHolder = CAShapeLayer()
+        let IMAGE_ = UIImageView.init()
+        let viewDark_ = UIView.init()
         
-        simPath.lineWidth = 2
-        UIColor.darkGray.set()
-        simPath.stroke()
-        setNeedsDisplay()
+        IMAGE_.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 220)
+        IMAGE_.kf.setImage(with: URL.init(string: Defaults[.appDefaultImageHeader]))
+        viewDark_.frame = IMAGE_.frame
+        viewDark_.backgroundColor = UIColor.darkGray.withAlphaComponent(0.1)
+        
+        simPath.close()
+        layerShapeHolder.path = simPath.cgPath
+        let boy = UIColor().gradientAtDashboard()
+        boy?.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 220)
+        boy?.mask = layerShapeHolder
+        
+        IMAGE_.contentMode = .scaleAspectFill
+        IMAGE_.clipsToBounds = true
+        IMAGE_.layer.mask = layerShapeHolder
+        IMAGE_.layer.addSublayer(boy!)
+        IMAGE_.addSubview(viewDark_)
+        self.addSubview(IMAGE_)
         
         "Draw".createMessage(message: "Success!")
     }
+    
+    private func getPath (yCenter : CGFloat = 210 , curveValue :CGFloat = 40) -> UIBezierPath {
+        
+        let simPath = UIBezierPath.init()
+        
+        simPath.move(to: CGPoint(x: 0, y: yCenter))
+        simPath.addQuadCurve(to: CGPoint(x: self.frame.width / 2, y: yCenter),
+                             controlPoint: CGPoint(x: self.frame.width / 4, y: (yCenter - curveValue)))
+        simPath.addQuadCurve(to: CGPoint(x: self.frame.width , y: yCenter), controlPoint: CGPoint(x: (self.frame.width - (self.frame.width / 4)) , y: (yCenter + curveValue)))
+        
+        simPath.addLine(to: CGPoint.init(x: self.frame.width , y: 0))
+        simPath.addLine(to: CGPoint.init(x: 0, y: 0))
+        simPath.addLine(to: CGPoint.init(x: 0, y: yCenter))
+        return simPath
+    }
+    
+    private func linedPath () -> UIBezierPath {
+        let yCenter : CGFloat = 170
+        let simPath = UIBezierPath.init()
+        simPath.move(to: CGPoint(x: 0, y: yCenter))
+        simPath.addLine(to: CGPoint.init(x: self.frame.width, y: yCenter + 50))
+        simPath.addLine(to: CGPoint.init(x: self.frame.width, y: 0))
+        simPath.addLine(to: CGPoint.init(x: 0, y: 0))
+        simPath.addLine(to: CGPoint.init(x: 0, y: yCenter))
+        return simPath
+    }
+    
+    
     
     private func setPath () {
         let originX = self.frame.origin.x
@@ -62,7 +98,8 @@ class SVGCanvasView: UIView {
     }
     
     
-
+    
+    
 }
 
 extension SVGCanvasView : Comparable {

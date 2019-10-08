@@ -11,7 +11,7 @@ import WebKit
 
 protocol loginWebViewDelegate {
     func didFinish(authCode value : String)
-    func didCommit()
+    func didCommit(url : String)
 }
 
 class LoginWebView: WKWebView , WKNavigationDelegate {
@@ -28,10 +28,12 @@ class LoginWebView: WKWebView , WKNavigationDelegate {
         "URLQuery".createMessage(message: url)
         if let _url = url.query , _url.contains("code=") {
             self.delegate?.didFinish(authCode: _url.replacingOccurrences(of: "code=", with: ""))
+        } else {
+            self.delegate?.didFinish(authCode: "")
         }
     }
     // When webView is load from url
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        self.delegate?.didCommit()
+        self.delegate?.didCommit(url: webView.url?.absoluteString ?? "")
     }
 }

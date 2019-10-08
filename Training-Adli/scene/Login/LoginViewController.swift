@@ -24,7 +24,9 @@ class LoginViewController: BaseViewController, LoginDisplayLogic
 {
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
+    @IBOutlet weak var addressBarLoader: UIActivityIndicatorView!
     @IBOutlet weak var webView: LoginWebView!
+    @IBOutlet weak var textAddressBarWeb: UITextField!
     
     // MARK: Object lifecycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -79,11 +81,32 @@ class LoginViewController: BaseViewController, LoginDisplayLogic
         webView.delegate = self
     }
     
+    private func setupTextField (isOpen : Bool = true) {
+        
+        var _space = UIView.init()
+        
+        func openFunc() {
+            _space = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 34, height: 34))
+        }
+        
+        func closeFunc() {
+            _space = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
+        }
+        
+        ( isOpen ) ? openFunc() : closeFunc()
+        textAddressBarWeb.leftViewMode = .always
+        textAddressBarWeb.leftView = _space
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    
     // when auth api success
     func displayCodeAuthentication(viewModel : Login.authenticationCode) {
         Defaults[.userAuthenticationCode] = viewModel.code ?? ""
         if Defaults[.userAuthenticationCode] != "" {
-            self.router?.routeToDashboard()
+            self.router?.routeToDashboard() //
         }
     }
     // when auth api given failed
@@ -93,11 +116,19 @@ class LoginViewController: BaseViewController, LoginDisplayLogic
 }
 
 extension LoginViewController : loginWebViewDelegate {
-    func didCommit() {
-        self.showLoading("")
+    func didCommit(url: String) {
+        self.textAddressBarWeb.text = url
+        self.addressBarLoader.startAnimating()
+        self.setupTextField()
+        self.addressBarLoader.isHidden = false
     }
+
     func didFinish(authCode value: String) {
-        self.hideLoading("")
-        interactor?.interactorParsingCode(CreateAuth: value)
+        self.setupTextField(isOpen: false)
+        self.addressBarLoader.stopAnimating()
+        self.addressBarLoader.isHidden = true
+        if !value.isEmpty {
+            interactor?.interactorParsingCode(CreateAuth: value)
+        }
     }
 }

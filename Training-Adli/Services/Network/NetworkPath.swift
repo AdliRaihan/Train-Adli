@@ -20,8 +20,10 @@ class NetworkPath {
         case .getPhotos:
             return "photos"
         case .setActionLike(let request):
-            "Request".createMessage(message: request.id!)
             return "photos/\(request.id ?? "0" )/like"
+        case .setActionUnlike(let request):
+            return "photos/\(request.id ?? "0" )/like"
+            
         }
     }
 }

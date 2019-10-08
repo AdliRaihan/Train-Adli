@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 
 class SVGViewController: UIViewController {
 
+    @IBOutlet weak var bodyImage: UIImageView! {
+        didSet {
+//            bodyImage.kf.setImage(with: URL.init(string: Defaults[.appDefaultImageHeader]))
+        }
+    }
     
     
     // Lsts Of Outlets

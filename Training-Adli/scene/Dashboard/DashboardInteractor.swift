@@ -18,6 +18,7 @@ protocol DashboardBusinessLogic
 {
     func getAllPhotos()
     func setLikedPhoto(_id : String)
+    func setUnlikePhoto(_id : String)
 }
 
 protocol DashboardDataStore
@@ -70,6 +71,26 @@ class DashboardInteractor: DashboardBusinessLogic, DashboardDataStore
         let request = Dashboard.likePhotos.request()
         request.id = _id
         DashboardWorker.init().setLikePhotos(request: request) { (result) in
+            switch result {
+            case .success(let data):
+                do {
+                    "Message".createMessage(message: try data.mapString())
+                } catch (let error) {
+                    self.presenter?.presentToFailed(message: error.localizedDescription)
+                }
+                break
+            case .error(let error):
+                self.presenter?.presentToFailed(message: error)
+                break
+            }
+        }
+    }
+    
+    
+    func setUnlikePhoto(_id: String) {
+        let request = Dashboard.likePhotos.request()
+        request.id = _id
+        DashboardWorker.init().setUnlikePhotos(request: request) { (result) in
             switch result {
             case .success(let data):
                 do {

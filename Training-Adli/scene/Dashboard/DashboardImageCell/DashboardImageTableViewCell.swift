@@ -10,6 +10,7 @@ import UIKit
 
 protocol dashboardCellImageDelegate : class  {
     func _didLike (id:String)
+    func _didUnlike (id:String)
 }
 
 class DashboardImageTableViewCell: UITableViewCell {
@@ -93,24 +94,44 @@ class DashboardImageTableViewCell: UITableViewCell {
     }
     
     @objc func likeAction(_ sender:Any) {
-        
+        loveHitboxes.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.25, options: .curveEaseInOut, animations: {
             self.loveImage.alpha = 1
             self.loveImage.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+            self.imageLove.transform = CGAffineTransform.init(scaleX: 1.2, y: 1.2)
+            (self.datastore.isLikedByUser == 0) ? self.likedByUser() : self.unlikedByUser()
         }) { (isDone) in
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer) in
-                UIView.animate(withDuration: 0.25, animations: {
+            Timer.scheduledTimer(withTimeInterval: 0.25, repeats: false, block: { (timer) in
+                UIView.animate(withDuration: 0.15, animations: {
                     self.loveImage.transform = CGAffineTransform.init(scaleX: 0.0001, y: 0.0001)
+                    self.imageLove.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                     self.loveImage.alpha = 0
-                })
+                }) { (isDone) in
+                    self.loveHitboxes.isUserInteractionEnabled = true
+                }
             })
             
             if isDone {
-                "Is Liked ?".createMessage(message: self.datastore.isLikedByUser!)
-//                self.idDelegate?._didLike(id: self.datastore.id ?? "Unkown")
+                self.prepareToSendAction()
             }
         }
         
+    }
+    
+    private func prepareToSendAction () {
+        switch self.datastore.isLikedByUser {
+        case 1:
+            self.idDelegate?._didUnlike(id: self.datastore.id ?? "Unkown")
+            self.datastore.isLikedByUser = 0
+            break
+        case 0:
+            self.idDelegate?._didLike(id: self.datastore.id ?? "Unkown")
+            self.datastore.isLikedByUser = 1
+            break
+        default:
+            break
+        }
+        "Is Liked ?".createMessage(message: self.datastore.isLikedByUser!)
     }
     
     @objc func addCollectionAction (_ sender:Any) {

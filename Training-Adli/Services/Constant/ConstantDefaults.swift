@@ -12,6 +12,7 @@ import SwiftyUserDefaults
 extension DefaultsKeys {
     
     static var userAuthenticationCode : DefaultsKey<String> { return .init("authenticationcode",defaultValue: "")}
+    static var appDefaultImageHeader : DefaultsKey<String>  { return .init("appDefaultImageHeader",defaultValue: "")}
     
     class func removeCredentials () {
         Defaults[.userAuthenticationCode] = ""

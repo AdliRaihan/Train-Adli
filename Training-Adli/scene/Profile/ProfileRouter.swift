@@ -37,10 +37,11 @@ class ProfileRouter: NSObject, ProfileRoutingLogic, ProfileDataPassing
     // navigate
     private func navigateToLogout(source : ProfileViewController) {
         let newRoot = UINavigationController.init(rootViewController: LoginViewController())
+        newRoot.setNavigationBarHidden(true, animated: false)
         if let _window = AppDelegate.shared.window {
-            newRoot.navigationController?.setToolbarHidden(true, animated: false)
             _window.rootViewController = newRoot
         }
+        
         source.show(newRoot, sender: nil)
     }
 }

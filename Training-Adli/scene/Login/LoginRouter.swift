@@ -36,10 +36,11 @@ class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing
     // navigate
     private func navigateToDashboard (source:LoginViewController,destination:DashboardViewController) {
         let newRoot = UINavigationController.init(rootViewController: DashboardTabBarViewController())
+        newRoot.setNavigationBarHidden(true, animated: false)
         if let _window = AppDelegate.shared.window {
-            newRoot.navigationController?.setToolbarHidden(true, animated: false)
             _window.rootViewController = newRoot
         }
+        source.navigationController?.setToolbarHidden(true, animated: false)
         source.show(newRoot, sender: nil)
     }
     

@@ -38,8 +38,8 @@ extension UIColor {
     
     func gradientAtDashboard () -> CAGradientLayer? {
         let gradientLayer : CAGradientLayer = CAGradientLayer()
-        let topColor = UIColor.init(rgb: 0x232526)
-        let bottomColor = UIColor.init(rgb: 0x414345)
+        let topColor = UIColor.init(rgb: 0x484848).withAlphaComponent(0)
+        let bottomColor = UIColor.init(rgb: 0x484848).withAlphaComponent(1)
         
         gradientLayer.colors = [topColor.cgColor,bottomColor.cgColor]
         return gradientLayer

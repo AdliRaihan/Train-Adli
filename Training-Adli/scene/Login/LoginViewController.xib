@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Training_Adli" customModuleProvider="target">
             <connections>
+                <outlet property="addressBarLoader" destination="mjX-Ch-CPU" id="2d7-1S-tFI"/>
+                <outlet property="textAddressBarWeb" destination="yQd-2c-8ZH" id="tej-6K-hkh"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Rxw-nv-rnv"/>
                 <outlet property="webView" destination="fcU-Nr-MO3" id="EHV-a3-J4Q"/>
             </connections>
@@ -22,22 +24,61 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcU-Nr-MO3" customClass="LoginWebView" customModule="Training_Adli" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <wkWebViewConfiguration key="configuration">
                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                         <wkPreferences key="preferences"/>
                     </wkWebViewConfiguration>
                 </wkWebView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6sm-Ke-kB2">
+                    <rect key="frame" x="0.0" y="20" width="375" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHx-vb-zYy">
+                            <rect key="frame" x="0.0" y="49" width="375" height="1"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="ENp-JZ-FTR"/>
+                            </constraints>
+                        </view>
+                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yQd-2c-8ZH">
+                            <rect key="frame" x="25" y="7" width="325" height="35"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mjX-Ch-CPU">
+                            <rect key="frame" x="35" y="15" width="20" height="19"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="mjX-Ch-CPU" firstAttribute="leading" secondItem="6sm-Ke-kB2" secondAttribute="leading" constant="35" id="4cI-5p-exr"/>
+                        <constraint firstItem="xHx-vb-zYy" firstAttribute="leading" secondItem="6sm-Ke-kB2" secondAttribute="leading" id="7vT-iI-JMK"/>
+                        <constraint firstAttribute="trailing" secondItem="xHx-vb-zYy" secondAttribute="trailing" id="9OI-gi-vmy"/>
+                        <constraint firstItem="xHx-vb-zYy" firstAttribute="top" secondItem="mjX-Ch-CPU" secondAttribute="bottom" constant="15" id="EhA-Xj-kim"/>
+                        <constraint firstItem="yQd-2c-8ZH" firstAttribute="top" secondItem="6sm-Ke-kB2" secondAttribute="top" constant="7" id="MvB-Q7-AyF"/>
+                        <constraint firstAttribute="trailing" secondItem="yQd-2c-8ZH" secondAttribute="trailing" constant="25" id="O0B-z5-vlE"/>
+                        <constraint firstItem="yQd-2c-8ZH" firstAttribute="leading" secondItem="6sm-Ke-kB2" secondAttribute="leading" constant="25" id="R4F-3h-pw3"/>
+                        <constraint firstAttribute="bottom" secondItem="xHx-vb-zYy" secondAttribute="bottom" id="RwN-cw-Vfw"/>
+                        <constraint firstItem="xHx-vb-zYy" firstAttribute="top" secondItem="yQd-2c-8ZH" secondAttribute="bottom" constant="7" id="c3y-ja-8kc"/>
+                        <constraint firstAttribute="height" constant="50" id="sUl-XD-yq4"/>
+                        <constraint firstItem="mjX-Ch-CPU" firstAttribute="top" secondItem="6sm-Ke-kB2" secondAttribute="top" constant="15" id="yjD-kg-7fO"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fcU-Nr-MO3" secondAttribute="trailing" id="47f-VM-r9p"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="fcU-Nr-MO3" secondAttribute="bottom" id="NIe-oR-Wsn"/>
-                <constraint firstItem="fcU-Nr-MO3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="SN1-rC-eSc"/>
-                <constraint firstItem="fcU-Nr-MO3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ZYl-ES-hhs"/>
+                <constraint firstItem="fcU-Nr-MO3" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="2hM-4P-FIR"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6sm-Ke-kB2" secondAttribute="trailing" id="85m-Iv-4aj"/>
+                <constraint firstItem="6sm-Ke-kB2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="NYx-if-hu0"/>
+                <constraint firstItem="fcU-Nr-MO3" firstAttribute="top" secondItem="6sm-Ke-kB2" secondAttribute="bottom" id="YbT-TI-X6R"/>
+                <constraint firstItem="fcU-Nr-MO3" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="eTp-jy-UCX"/>
+                <constraint firstItem="6sm-Ke-kB2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="t28-qs-QiM"/>
+                <constraint firstItem="fcU-Nr-MO3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="wWa-BB-eKp"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="132" y="154.27286356821591"/>
         </view>
     </objects>
 </document>

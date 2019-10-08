@@ -93,7 +93,7 @@ extension AppDelegate {
             "AppDelegate".createMessage( message: "Initialize Root View Controller" )
             
             if Defaults[.userAuthenticationCode].isEmpty {
-                rootController.navigationController?.setToolbarHidden(true, animated: false)
+                rootController.setNavigationBarHidden(true, animated: false)
                 
                 _window.rootViewController = rootController
             } else {

@@ -32,6 +32,10 @@ class NetworkTasks {
             // set Like Action
         case .setActionLike(let request):
             return .requestParameters(parameters: Dashboard.likePhotos.createParams(request: request), encoding: URLEncoding.default)
+            
+            // set Unlike Action
+        case .setActionUnlike(let request):
+            return .requestParameters(parameters: Dashboard.likePhotos.createParams(request: request), encoding: URLEncoding.default)
         }
     
     }

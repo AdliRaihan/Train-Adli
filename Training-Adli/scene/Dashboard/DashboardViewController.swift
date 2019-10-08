@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 
 protocol DashboardDisplayLogic: class
 {
@@ -83,6 +84,12 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
     private func setupUI(){
         setupTextField()
         setupTableView()
+        setupNavigation()
+    }
+    
+    private func setupNavigation() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        imageHolderDashboard.kf.setImage(with: URL.init(string: Defaults[.appDefaultImageHeader]))
     }
     
     private func setupTextField () {
@@ -110,8 +117,11 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
     }
     
     func displayToShowPhotos(_response: Dashboard.getPhotos.viewModel) {
-        "URL".createMessage(message: _response.responsePrimary![1].urls!._regular!)
-        imageHolderDashboard.kf.setImage(with: URL.init(string: _response.responsePrimary![1].urls!._regular ?? ""))
+        guard _response.responsePrimary != nil else { return }
+        guard _response.responsePrimary!.count > 0 else { return }
+        let urlImage : String = _response.responsePrimary!.last!.urls!._regular ?? ""
+        imageHolderDashboard.kf.setImage(with: URL.init(string: urlImage))
+        Defaults[.appDefaultImageHeader] = urlImage
         
         for dataResponse in _response.responsePrimary! {
             self.dsTableView.modelImages.append(dataResponse.urls!._regular!)
@@ -168,7 +178,8 @@ extension DashboardViewController : UITableViewDelegate , UITableViewDataSource 
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        self.viewConstraintValue.constant = CGFloat(500 * self.dsTableView.modelImages.count) - UIScreen.main.bounds.height / 1.65
+        "contentSized".createMessage(message: tableView.contentSize)
+        self.viewConstraintValue.constant = tableView.contentSize.height - (UIScreen.main.bounds.height - 210)
         return 500.0
     }
     
@@ -182,8 +193,11 @@ extension DashboardViewController : UITableViewDelegate , UITableViewDataSource 
 
 extension DashboardViewController : dashboardCellImageDelegate {
     func _didLike(id: String) {
-//        "Image Loved at ID".createMessage(message: id)
         _createAddQueueTasks(id)
+    }
+    
+    func _didUnlike(id: String) {
+        __createAddQueueTasks(id)
     }
     
     private func _createAddQueueTasks (_ ids : String) {
@@ -192,6 +206,16 @@ extension DashboardViewController : dashboardCellImageDelegate {
             queued.async {
                 "From : \(queued.label)".createMessage(message: ids)
                 self.interactor?.setLikedPhoto(_id: ids)
+            }
+        }
+    }
+    
+    private func __createAddQueueTasks (_ ids : String) {
+        DispatchQueue.global(qos: .background).async {
+            let queued = DispatchQueue.init(label: "REQUEST_FOR_UNLIKED_PHOTOS_TEST:DEV - ADLI")
+            queued.async {
+                "From : \(queued.label)".createMessage(message: ids)
+                self.interactor?.setUnlikePhoto(_id: ids)
             }
         }
     }
