@@ -35,7 +35,7 @@ class DashboardTabBarViewController: UITabBarController {
     }
     
     private func setupSecondController () -> UIViewController {
-        let controller = SVGViewController()
+        let controller = CategoryViewController()
         controller.tabBarItem = UITabBarItem.init(title: "", image: createTabImage(_NameImage: "ic_tabbar_add"), tag: 1)
         controller.tabBarItem.imageInsets = UIEdgeInsets.init(top: 6, left: 0, bottom: -6, right: 0)
         return controller
@@ -66,15 +66,5 @@ class DashboardTabBarViewController: UITabBarController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

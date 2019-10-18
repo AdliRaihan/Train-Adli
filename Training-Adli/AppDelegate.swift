@@ -8,10 +8,12 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 import SwiftyUserDefaults
+import RealmSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate {
 
     static let shared = AppDelegate()
     var window: UIWindow?
@@ -45,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         self.deleteAllCoreData(required: "Entity")
         self.setupNewRootController()
+        self.requestAccessNotification()
+        self._realmConfig()
         return true
     }
     
@@ -77,6 +81,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound,.badge])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        "Response Identifier".createMessage(message: response.notification.request.identifier)
+        
+    }
 
 }
 
@@ -111,6 +124,28 @@ extension AppDelegate {
         if let _window = window {
             _window.rootViewController = otherRoot
         }
+    }
+    
+    private func requestAccessNotification() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        let options : UNAuthorizationOptions  = [.alert,.sound,.badge]
+        
+        notificationCenter.delegate = self
+        
+        notificationCenter.requestAuthorization(options: options) { (isGranted, error) in
+            guard error == nil else {return}
+            
+            if !isGranted {
+                print("Declined!")
+            }
+            
+        }
+    }
+    
+    private func _realmConfig () {
+        let configuration = Realm.Configuration( schemaVersion : 1 )
+        // -
+        Realm.Configuration.defaultConfiguration = configuration
     }
 }
 

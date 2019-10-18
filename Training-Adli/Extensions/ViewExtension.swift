@@ -31,12 +31,12 @@ extension UIView {
     }
     
     // default shadows
-    func setShadow (withColor color : UIColor = .black,Opacity opacity : Float = 0.095) {
+    func setShadow (withColor color : UIColor = .black,Opacity opacity : Float = 0.1) {
         layer.masksToBounds = false
         layer.shadowColor = color.cgColor
         layer.shadowOpacity = opacity
         layer.shadowOffset = .zero
-        layer.shadowRadius = 1
+        layer.shadowRadius = 5
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
     }

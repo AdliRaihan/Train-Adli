@@ -14,6 +14,7 @@ import UIKit
 
 protocol DashboardPresentationLogic
 {
+    func presentToShowOfflinePhotos (model : [DashboardImages])
     func presentToShowPhotos (response : [Dashboard.getPhotos.response])
     func presentToFailed (message : String)
 }
@@ -21,6 +22,11 @@ protocol DashboardPresentationLogic
 class DashboardPresenter: DashboardPresentationLogic
 {
     weak var viewController: DashboardDisplayLogic?
+    
+    // Show when offline photos is available
+    func presentToShowOfflinePhotos(model: [DashboardImages]) {
+        viewController?.displayToShowOfflinePhotos(viewModel: model)
+    }
     
     // Show when success to load images
     func presentToShowPhotos(response: [Dashboard.getPhotos.response]) {

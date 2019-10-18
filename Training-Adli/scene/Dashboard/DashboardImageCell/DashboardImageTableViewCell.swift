@@ -145,4 +145,13 @@ class DashboardImageTableViewCell: UITableViewCell {
         imageLove.alpha = 0.5
     }
     
+    override func prepareForReuse() {
+        self.idDelegate = nil
+        if self.imageCell != nil {
+            self.imageCell.image = nil
+            self.usernameLabel.text = nil
+            self.descriptionLabel.text = nil
+        }
+    }
+    
 }

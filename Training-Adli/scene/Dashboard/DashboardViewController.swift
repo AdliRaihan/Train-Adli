@@ -12,9 +12,12 @@
 
 import UIKit
 import SwiftyUserDefaults
+import Kingfisher
+import UserNotifications
 
 protocol DashboardDisplayLogic: class
 {
+    func displayToShowOfflinePhotos (viewModel : [DashboardImages])
     func displayToShowPhotos(_response : Dashboard.getPhotos.viewModel)
     func displayError (message : String)
 }
@@ -26,8 +29,13 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imageHolderDashboard: UIImageView!
     @IBOutlet weak var viewConstraintValue: NSLayoutConstraint!
+    @IBOutlet weak var activityLoadBottom : UIActivityIndicatorView!
+    var cell : DashboardImageTableViewCell!
     
+    private var demandRequest = Dashboard.getPhotos.request()
     private var dsTableView = Dashboard.getPhotos.tableViewModel.init()
+    private var dsIsRefreshed = false
+    private var dsIsExpanded = false
     var interactor: DashboardBusinessLogic?
     var router: (NSObjectProtocol & DashboardRoutingLogic & DashboardDataPassing)?
     
@@ -76,15 +84,56 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
     
     override func viewDidLoad()
     {
+        
         super.viewDidLoad()
-        setupUI()
-        setupInteractor()
+        
+        DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
+                self.setupObserver()
+                self.setupFirstLoad()
+                self.setupUI()
+                self.displayOfflineImages()
+                self.setupInteractor()
+                self.notificationMatters()
+            }
+        }
+        
+    }
+    
+    private func displayOfflineImages () {
+        self.interactor?.getOfflinePhotos()
     }
     
     private func setupUI(){
+        
         setupTextField()
         setupTableView()
         setupNavigation()
+        
+    }
+    
+    private func setupFirstLoad() {
+        let nib = UINib.init(nibName: "DashboardImageTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "imageCell")
+        self.demandRequest.perPage = "50"
+        self.demandRequest.orderBy = "1"
+        self.demandRequest.page = "1"
+    }
+    
+    private func setupObserver() {
+        self.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+    }
+    
+    private func dismissObserver () {
+        self.removeObserver(self, forKeyPath: "contentSize")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize" {
+            if let newValue = change?[.newKey] {
+                let newSize = newValue as? CGSize
+            }
+        }
     }
     
     private func setupNavigation() {
@@ -111,9 +160,35 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
     }
     
     private func setupInteractor () {
-        self.showLoading("")
         "Token Access".createMessage(message: ConstantVariables.accessToken)
-        interactor?.getAllPhotos()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NSNotification.Name.contentConnection), object: nil, userInfo: nil)
+        interactor?.getAllPhotos(request: demandRequest)
+    }
+    
+    private func resetDataStore () {
+        self.dsTableView.modelImages.removeAll()
+        self.dsTableView.descriptionsImage.removeAll()
+        self.dsTableView.username.removeAll()
+        self.dsTableView.usernameImage.removeAll()
+        self.dsTableView.idsPhoto.removeAll()
+        self.dsTableView.likedByUser.removeAll()
+    }
+    
+    // Protocol Area
+    func displayToShowOfflinePhotos(viewModel: [DashboardImages]) {
+        
+        "Offline Photos".createMessage(message: "Through this ")
+        
+        for dataResponse in viewModel {
+            self.dsTableView.username.append(dataResponse.username)
+            self.dsTableView.modelImages.append(dataResponse.image)
+            self.dsTableView.likedByUser.append(Int(dataResponse.liked) ?? 0)
+            self.dsTableView.idsPhoto.append(dataResponse.id)
+            self.dsTableView.usernameImage.append("")
+            self.dsTableView.descriptionsImage.append("No Description" )
+        }
+        
+        self.tableView.reloadData()
     }
     
     func displayToShowPhotos(_response: Dashboard.getPhotos.viewModel) {
@@ -132,12 +207,62 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
             self.dsTableView.likedByUser.append(dataResponse.liked_by_user!)
         }
         
+        
+        self.interactor?.saveAllPhotos(data: dsTableView)
         self.tableView.reloadData()
     }
     
     func displayError(message: String) {
         self.showAlert(_message: message)
     }
+    
+    
+    
+    private func notificationMatters () {
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        notificationCenter.getNotificationSettings { (settings) in
+            if settings.authorizationStatus != .authorized {
+                print("Not Granted!")
+            } else {
+                "Notification".createMessage(message: "Notification Granted!")
+                self.buildNotifications(notificationCenter: notificationCenter)
+            }
+        }
+    }
+    
+    private func buildNotifications (notificationCenter : UNUserNotificationCenter) {
+        NotificationCenter.default.addObserver(self, selector: #selector(setToOnline), name: NSNotification.Name(rawValue: NSNotification.Name.contentConnection) , object: nil)
+    }
+    
+    @objc private func testNotificationCenter () {
+        "Test".createMessage(message: "HELLO !!!!")
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Test Notifications"
+        content.body = "Testing !"
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 3, repeats: false)
+        let identifier = "Local Notifications"
+        let request = UNNotificationRequest.init(identifier: identifier, content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { (error) in
+            guard error == nil else { return }
+            
+        }
+    }
+    
+    @objc private func setToOnline () {
+        self.resetDataStore()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NSNotification.Name.contentConnection), object: nil)
+    }
+    
     
 }
 
@@ -147,39 +272,61 @@ extension DashboardViewController : UITableViewDelegate , UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.hideLoading("")
-        let nib = UINib.init(nibName: "DashboardImageTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "imageCell")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell") as? DashboardImageTableViewCell
-        return initializeCell(cell ?? UITableViewCell(), row: indexPath.row)
+        self.dsIsRefreshed = false
+        self.dsIsExpanded = false
+        
+        self.cell = (tableView.dequeueReusableCell(withIdentifier: "imageCell") as! DashboardImageTableViewCell)
+        
+        initializeCell(cell ?? UITableViewCell(), row: indexPath.row) { (_cell) in
+            self.cell = _cell as? DashboardImageTableViewCell
+        }
+        
+        return cell
     }
     
-    private func initializeCell (_ cell : UITableViewCell , row : Int) -> UITableViewCell {
-        if let _cell = cell as? DashboardImageTableViewCell {
-            _cell.imageCell.kf.setImage(with: URL.init(string: self.dsTableView.modelImages[row])!)
-            _cell.usernameLabel.text = self.dsTableView.username[row]
-            _cell.imageProfileCell.kf.setImage(with: URL.init(string: self.dsTableView.usernameImage[row])!)
-            _cell.descriptionLabel.text = self.dsTableView.descriptionsImage[row]
-            // Initialze Data
-            _cell.datastore.id = self.dsTableView.idsPhoto[row]
-            _cell.datastore.isLikedByUser = self.dsTableView.likedByUser[row]
-            
-            if self.dsTableView.likedByUser[row] == 1 {
-                _cell.likedByUser()
-            } else {
-                _cell.unlikedByUser()
+    private func initializeCell (_ cell : UITableViewCell , row : Int , completion : @escaping (UITableViewCell) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
+                if let _cell = cell as? DashboardImageTableViewCell , row < (self.dsTableView.username.count - 1)  {
+                    self.setImage(imageView: _cell.imageCell, row: row)
+                    _cell.usernameLabel.text = self.dsTableView.username[row]
+                    
+                    _cell.descriptionLabel.text = self.dsTableView.descriptionsImage[row]
+                    // Initialze Data
+                    _cell.datastore.id = self.dsTableView.idsPhoto[row]
+                    _cell.datastore.isLikedByUser = self.dsTableView.likedByUser[row]
+                    
+                    if !self.dsTableView.usernameImage[row].isEmpty {
+                        _cell.imageProfileCell.kf.setImage(with: URL.init(string: self.dsTableView.usernameImage[row])!)
+                    }
+                    
+                    if self.dsTableView.likedByUser[row] == 1 {
+                        _cell.likedByUser()
+                    } else {
+                        _cell.unlikedByUser()
+                    }
+                    
+                    _cell.idDelegate = self
+                    completion(_cell)
+                }
             }
-            
-            _cell.idDelegate = self
-            return _cell
         }
-        return cell
+//        return cell
+    }
+    
+    private func setImage(imageView : UIImageView,row : Int) {
+        if row > self.dsTableView.modelImages.count - 1 {
+            return
+        }
+        let url = URL.init(string: self.dsTableView.modelImages[row])
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: url!, placeholder: nil, options: [.backgroundDecode], progressBlock: nil, completionHandler: nil)
+        
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        "contentSized".createMessage(message: tableView.contentSize)
-        self.viewConstraintValue.constant = tableView.contentSize.height - (UIScreen.main.bounds.height - 210)
+        self.viewConstraintValue.constant = CGFloat((500 * self.dsTableView.descriptionsImage.count)) - (UIScreen.main.bounds.height - 210)
         return 500.0
     }
     
@@ -189,6 +336,8 @@ extension DashboardViewController : UITableViewDelegate , UITableViewDataSource 
 //            "Cell Selected".createMessage(message: _cell.datastore.id!)
         }
     }
+    
+    
 }
 
 extension DashboardViewController : dashboardCellImageDelegate {
@@ -221,3 +370,43 @@ extension DashboardViewController : dashboardCellImageDelegate {
     }
 }
 
+extension DashboardViewController : UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let indexValue : CGFloat = scrollView.contentOffset.y
+        if indexValue <= -150 && !self.dsIsRefreshed {
+            self.dsIsRefreshed = true
+            self.resetDataStore()
+            self.interactor?.getAllPhotos(request: demandRequest)
+        } else if indexValue >=  (self.viewConstraintValue.constant - 462) && !self.dsIsExpanded {
+            self.dsIsExpanded = true
+            self.expandDemandRequest()
+            self.interactor?.getAllPhotos(request: demandRequest)
+        }
+    }
+    
+    private func expandDemandRequest () {
+        if var perPage = Int(demandRequest.perPage!) {
+            expandPage()
+            self.demandRequest.perPage = "\(perPage)"
+        }
+        
+        func expandOrder () {
+            if var orderBy = Int(demandRequest.orderBy!) {
+                orderBy += 1
+                self.demandRequest.orderBy = "\(orderBy)"
+            }
+        }
+    }
+    
+    
+    private func expandPage () {
+        if var page = Int(demandRequest.page!) {
+            page += 1
+            self.demandRequest.page = "\(page)"
+        }
+    }
+    
+    
+    
+}

@@ -28,6 +28,10 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
             imageProfile.clipsToBounds = true
         }
     }
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollViewContentHeights: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewInsideContent : UIView!
+    
     @IBOutlet weak var imageCollectionPrimary : UIImageView!
     @IBOutlet weak var imageCollectionSecondaryOne : UIImageView!
     @IBOutlet weak var imageCollectionSecondaryTwo : UIImageView!
@@ -47,6 +51,7 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     @IBOutlet weak var followersCountProfile: UILabel!
     @IBOutlet weak var collectionsCountProfile: UILabel!
     
+    @IBOutlet weak var newProfileHolder: UIView!
     var interactor: ProfileBusinessLogic?
     var router: (NSObjectProtocol & ProfileRoutingLogic & ProfileDataPassing)?
     
@@ -64,7 +69,7 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
         setup()
     }
     
-    // MARK: Setup
+    // MARK: Setu
     
     private func setup()
     {
@@ -81,7 +86,6 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     }
     
     // MARK: Routing
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let scene = segue.identifier {
@@ -97,11 +101,17 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setupUI()
-        setupIO()
-        do_getProfile()
+        newSetupUI()
+//        setupUI()
+//        setupIO()
+//        do_getProfile()
     }
     
+    private func newSetupUI () {
+        self.newProfileHolder.setShadow()
+        self.scrollViewContentHeights.constant = self.scrollViewContentHeights.constant + 300.0
+        self.scrollView.delegate = self
+    }
     
     private func setupUI() {
         menuSidePositionLeft.constant = -menuSide.frame.width
@@ -153,5 +163,13 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
 
 extension ProfileViewController  {
     // Button Action
+    
+}
+
+extension ProfileViewController : UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        "Offset ".createMessage(message: scrollView.contentOffset.y)
+    }
     
 }

@@ -29,6 +29,8 @@ class SVGCanvasView: UIView {
         let layerShapeHolder = CAShapeLayer()
         let IMAGE_ = UIImageView.init()
         let viewDark_ = UIView.init()
+        let _dashedLine = _drawDashedLine()
+        let _shapeLayerDashedLine = CAShapeLayer.init()
         
         IMAGE_.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 220)
         IMAGE_.kf.setImage(with: URL.init(string: Defaults[.appDefaultImageHeader]))
@@ -37,6 +39,7 @@ class SVGCanvasView: UIView {
         
         simPath.close()
         layerShapeHolder.path = simPath.cgPath
+        _shapeLayerDashedLine.path = _dashedLine.cgPath
         let boy = UIColor().gradientAtDashboard()
         boy?.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 220)
         boy?.mask = layerShapeHolder
@@ -45,6 +48,7 @@ class SVGCanvasView: UIView {
         IMAGE_.clipsToBounds = true
         IMAGE_.layer.mask = layerShapeHolder
         IMAGE_.layer.addSublayer(boy!)
+        IMAGE_.layer.addSublayer(_shapeLayerDashedLine)
         IMAGE_.addSubview(viewDark_)
         self.addSubview(IMAGE_)
         
@@ -77,7 +81,18 @@ class SVGCanvasView: UIView {
         return simPath
     }
     
-    
+    private func _drawDashedLine () -> UIBezierPath {
+        let dashedLine = UIBezierPath.init()
+        dashedLine.move(to: CGPoint.init(x: 5, y: 172))
+        dashedLine.addLine(to: CGPoint.init(x: self.frame.width, y: 172 + 50))
+        dashedLine.lineCapStyle = .butt
+        dashedLine.lineJoinStyle = .round
+        dashedLine.setLineDash([8.0,12.0], count: 2, phase: 0.0)
+        dashedLine.lineWidth = 2
+        UIColor.white.withAlphaComponent(0.5).set()
+        dashedLine.stroke()
+        return dashedLine
+    }
     
     private func setPath () {
         let originX = self.frame.origin.x
