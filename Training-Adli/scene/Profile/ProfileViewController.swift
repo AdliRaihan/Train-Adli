@@ -19,18 +19,44 @@ protocol ProfileDisplayLogic: class
     func displayToProfile(viewModel : Profile.privateProfile.viewModel)
 }
 
+enum profileViewer {
+    case _self
+    case _other
+    case _mod
+    case _friends
+    case _fromdashboard
+}
+
 class ProfileViewController: UIViewController, ProfileDisplayLogic
 {
     // Outlets
+    @IBOutlet weak var openSideMenuButton: UIButton! {
+        didSet {
+            let image = UIImage.init(named: "ic_menu")?.withRenderingMode(.alwaysTemplate)
+            openSideMenuButton.tintColor = UIColor.white
+            openSideMenuButton.setImage(image, for: .normal)
+            openSideMenuButton.setTitle("", for: .normal)
+        }
+    }
+    @IBOutlet weak var topConstraintProfileSection: NSLayoutConstraint!
+    @IBOutlet weak var profileSectionViewHolder: UIView!
     @IBOutlet weak var imageProfile: UIImageView! {
         didSet{
             imageProfile.circleRadius()
             imageProfile.clipsToBounds = true
         }
     }
+    
+    @IBOutlet weak var leftSideMenuConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftSideMenuButtonConstraintRight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewContentHeights: NSLayoutConstraint!
     @IBOutlet weak var scrollViewInsideContent : UIView!
+    @IBOutlet weak var tableViewProfileContent: tableViewProfileContent!
+    
+    @IBOutlet weak var followInContentButton: UIButton!
+    @IBOutlet weak var usernameInContentLabel: UILabel!
+    
     
     @IBOutlet weak var imageCollectionPrimary : UIImageView!
     @IBOutlet weak var imageCollectionSecondaryOne : UIImageView!
@@ -52,6 +78,11 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     @IBOutlet weak var collectionsCountProfile: UILabel!
     
     @IBOutlet weak var newProfileHolder: UIView!
+    
+    
+    // List Object
+    lazy var contentCell : [ UITableViewCell ] = [CollectionTableViewCell()]
+    var isMenuOpen = false
     var interactor: ProfileBusinessLogic?
     var router: (NSObjectProtocol & ProfileRoutingLogic & ProfileDataPassing)?
     
@@ -102,6 +133,8 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     {
         super.viewDidLoad()
         newSetupUI()
+        newSetupIO()
+        attachProfileContent()
 //        setupUI()
 //        setupIO()
 //        do_getProfile()
@@ -111,12 +144,26 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
         self.newProfileHolder.setShadow()
         self.scrollViewContentHeights.constant = self.scrollViewContentHeights.constant + 300.0
         self.scrollView.delegate = self
+        self.scrollView.bounces  = false
+        self.leftSideMenuConstraint.constant = -UIScreen.main.bounds.width
+    }
+    
+    private func newSetupIO () {
+        
+        
+    }
+    
+    private func attachProfileContent () {
+        self.tableViewProfileContent.initializeData(parent: self)
+        self.tableViewProfileContent.isScrollEnabled = false
+        self.tableViewProfileContent.bounces = false
     }
     
     private func setupUI() {
         menuSidePositionLeft.constant = -menuSide.frame.width
         menuSideHideGestureView.isHidden = true
     }
+    
     private func setupIO() {
         menuSideButtonAction.isUserInteractionEnabled = true
         menuSideButtonAction.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showSideBarMenu)))
@@ -127,6 +174,8 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     private func do_getProfile() {
         interactor?.getProfile()
     }
+    
+    
     
     @objc private func showSideBarMenu () {
         menuSidePositionLeft.constant = 0
@@ -152,6 +201,25 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
         self.imageProfile.kf.setImage(with: URL.init(string: viewModel.imageURL ?? ""))
     }
     
+    // Action button to show left side menu
+    @IBAction func buttonOpenSideMenu(_ sender: Any) {
+        changeButtonColor()
+        self.leftSideMenuConstraint.constant = (isMenuOpen) ? -UIScreen.main.bounds.width : 0
+        self.leftSideMenuButtonConstraintRight.constant = (isMenuOpen) ? 25 : UIScreen.main.bounds.width - 50
+        self.isMenuOpen = !isMenuOpen
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5, initialSpringVelocity: 10, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }) {
+            (finish) in
+            self.scrollView.isScrollEnabled = !self.isMenuOpen
+        }
+    }
+    
+    // methods for change button tint Color
+    private func changeButtonColor () {
+        self.openSideMenuButton.tintColor = (isMenuOpen) ? UIColor.white : UIColor.black
+    }
+    
     // MARK: Do something
     @IBAction func buttonLogoutAction(_ sender: Any) {
         Defaults[.userAuthenticationCode] = ""
@@ -162,6 +230,7 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
 }
 
 extension ProfileViewController  {
+    
     // Button Action
     
 }
@@ -169,7 +238,39 @@ extension ProfileViewController  {
 extension ProfileViewController : UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        "Offset ".createMessage(message: scrollView.contentOffset.y)
+        let yOffset = scrollView.contentOffset.y
+        // I dont even know what this is
+        guard yOffset > 0 else { return }
+        guard scrollView == self.scrollView else { return }
+        
+        tableViewProfileContent.isScrollEnabled = false
+        topConstraintProfileSection.constant = (yOffset / 20)
+        profileSectionViewHolder.alpha = 1 - (yOffset / 300)
+        
+        // Content Switcher
+        if yOffset > 25 {
+            self.scrollViewInsideContent.setShadow(Opacity: 0.05)
+        } else {
+            self.scrollViewInsideContent.setShadow(withColor: UIColor.white, Opacity: 0)
+        }
+        
+        // Show Or Hide Username & Follow
+        if yOffset > 290 {
+            tableViewProfileContent.isScrollEnabled = true
+            _showOrHideUsernameAndFollow()
+        } else {
+            _showOrHideUsernameAndFollow(hide: true)
+        }
+        
     }
+    
+    private func _showOrHideUsernameAndFollow (hide : Bool = false) {
+        let alpha : CGFloat = (hide) ? 0 : 1
+        UIView.animate(withDuration: 0.25) {
+            self.usernameInContentLabel.alpha = alpha
+        }
+    }
+    
+    
     
 }

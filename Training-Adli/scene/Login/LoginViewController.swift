@@ -78,6 +78,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic
     //@IBOutlet weak var nameTextField: UITextField!
     private func WebViewSetup() {
         webView.load(URLRequest.init(url: URL.init(string: ConstantVariables.urlToGetAuthorization)!))
+        addressBarLoader.startAnimating()
         webView.delegate = self
     }
     
@@ -109,6 +110,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic
             self.router?.routeToDashboard() //
         }
     }
+    
     // when auth api given failed
     func displayCodeAuthenticationFailed(message: String) {
         self.showAlert(_message: message)
