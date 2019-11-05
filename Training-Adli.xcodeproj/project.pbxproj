@@ -49,6 +49,13 @@
 		069EB33D2357191D00C8549D /* DashboardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069EB33C2357191D00C8549D /* DashboardRepository.swift */; };
 		06B6DFBA2355D0E700AA397A /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B6DFB92355D0E700AA397A /* NotificationNameExtension.swift */; };
 		06BACE3A233A0647007521F6 /* wkWebViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BACE39233A0647007521F6 /* wkWebViewExtension.swift */; };
+		06BD57A62362A47000CB5BE4 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD57A02362A47000CB5BE4 /* SettingsPresenter.swift */; };
+		06BD57A72362A47000CB5BE4 /* SettingsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD57A12362A47000CB5BE4 /* SettingsWorker.swift */; };
+		06BD57A82362A47000CB5BE4 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD57A22362A47000CB5BE4 /* SettingsRouter.swift */; };
+		06BD57A92362A47000CB5BE4 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD57A32362A47000CB5BE4 /* SettingsModels.swift */; };
+		06BD57AA2362A47000CB5BE4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD57A42362A47000CB5BE4 /* SettingsViewController.swift */; };
+		06BD57AB2362A47000CB5BE4 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD57A52362A47000CB5BE4 /* SettingsInteractor.swift */; };
+		06BD57AD2362A48A00CB5BE4 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06BD57AC2362A48A00CB5BE4 /* SettingsViewController.xib */; };
 		06CCCD8E235ED63D00FFD9F4 /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CCCD8D235ED63D00FFD9F4 /* ProfileContentView.swift */; };
 		06CCCD90235ED64B00FFD9F4 /* ProfileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06CCCD8F235ED64B00FFD9F4 /* ProfileContentView.xib */; };
 		06CCCD92235EDC4400FFD9F4 /* tableViewProfileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CCCD91235EDC4400FFD9F4 /* tableViewProfileContent.swift */; };
@@ -66,6 +73,8 @@
 		06D766E7232F85D000316C72 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D766E5232F85D000316C72 /* ExploreViewController.xib */; };
 		06D766E9232F867200316C72 /* ExploreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D766E8232F867200316C72 /* ExploreTableViewCell.swift */; };
 		06D766EB232F868200316C72 /* ExploreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D766EA232F868200316C72 /* ExploreTableViewCell.xib */; };
+		06E043A4236A865D00457244 /* ActivityNoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E043A2236A865D00457244 /* ActivityNoneTableViewCell.swift */; };
+		06E043A5236A865D00457244 /* ActivityNoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E043A3236A865D00457244 /* ActivityNoneTableViewCell.xib */; };
 		06E1B9C7234D942800E5130A /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1B9C1234D942800E5130A /* CategoryPresenter.swift */; };
 		06E1B9C8234D942800E5130A /* CategoryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1B9C2234D942800E5130A /* CategoryWorker.swift */; };
 		06E1B9C9234D942800E5130A /* CategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1B9C3234D942800E5130A /* CategoryRouter.swift */; };
@@ -172,6 +181,13 @@
 		069EB33C2357191D00C8549D /* DashboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardRepository.swift; sourceTree = "<group>"; };
 		06B6DFB92355D0E700AA397A /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		06BACE39233A0647007521F6 /* wkWebViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wkWebViewExtension.swift; sourceTree = "<group>"; };
+		06BD57A02362A47000CB5BE4 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		06BD57A12362A47000CB5BE4 /* SettingsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWorker.swift; sourceTree = "<group>"; };
+		06BD57A22362A47000CB5BE4 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		06BD57A32362A47000CB5BE4 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
+		06BD57A42362A47000CB5BE4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		06BD57A52362A47000CB5BE4 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
+		06BD57AC2362A48A00CB5BE4 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		06CCCD8D235ED63D00FFD9F4 /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
 		06CCCD8F235ED64B00FFD9F4 /* ProfileContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileContentView.xib; sourceTree = "<group>"; };
 		06CCCD91235EDC4400FFD9F4 /* tableViewProfileContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableViewProfileContent.swift; sourceTree = "<group>"; };
@@ -189,6 +205,8 @@
 		06D766E5232F85D000316C72 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
 		06D766E8232F867200316C72 /* ExploreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableViewCell.swift; sourceTree = "<group>"; };
 		06D766EA232F868200316C72 /* ExploreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreTableViewCell.xib; sourceTree = "<group>"; };
+		06E043A2236A865D00457244 /* ActivityNoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityNoneTableViewCell.swift; sourceTree = "<group>"; };
+		06E043A3236A865D00457244 /* ActivityNoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityNoneTableViewCell.xib; sourceTree = "<group>"; };
 		06E1B9C1234D942800E5130A /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		06E1B9C2234D942800E5130A /* CategoryWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWorker.swift; sourceTree = "<group>"; };
 		06E1B9C3234D942800E5130A /* CategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRouter.swift; sourceTree = "<group>"; };
@@ -497,6 +515,29 @@
 			path = Domains;
 			sourceTree = "<group>";
 		};
+		06BD579E2362A42500CB5BE4 /* ProfileSubMenu */ = {
+			isa = PBXGroup;
+			children = (
+				06BD579F2362A43000CB5BE4 /* Settings */,
+			);
+			path = ProfileSubMenu;
+			sourceTree = "<group>";
+		};
+		06BD579F2362A43000CB5BE4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				06BD57A02362A47000CB5BE4 /* SettingsPresenter.swift */,
+				06BD57A12362A47000CB5BE4 /* SettingsWorker.swift */,
+				06BD57A22362A47000CB5BE4 /* SettingsRouter.swift */,
+				06BD57A32362A47000CB5BE4 /* SettingsModels.swift */,
+				06BD57A42362A47000CB5BE4 /* SettingsViewController.swift */,
+				06BD57A52362A47000CB5BE4 /* SettingsInteractor.swift */,
+				06BD57AC2362A48A00CB5BE4 /* SettingsViewController.xib */,
+			);
+			name = Settings;
+			path = "../New Group/New Group";
+			sourceTree = "<group>";
+		};
 		06CCCD8C235EBF9B00FFD9F4 /* ProfileContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,6 +554,8 @@
 			children = (
 				06CCCD94235EE08E00FFD9F4 /* CollectionTableViewCell.swift */,
 				06CCCD95235EE08E00FFD9F4 /* CollectionTableViewCell.xib */,
+				06E043A2236A865D00457244 /* ActivityNoneTableViewCell.swift */,
+				06E043A3236A865D00457244 /* ActivityNoneTableViewCell.xib */,
 			);
 			path = ListContent;
 			sourceTree = "<group>";
@@ -520,6 +563,7 @@
 		06CEAE172344897700E9EF3C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				06BD579E2362A42500CB5BE4 /* ProfileSubMenu */,
 				06CCCD8C235EBF9B00FFD9F4 /* ProfileContent */,
 				06CEAE182344899800E9EF3C /* ProfilePresenter.swift */,
 				06CEAE192344899800E9EF3C /* ProfileWorker.swift */,
@@ -787,10 +831,12 @@
 				064BB215234327D600392C57 /* SVGViewController.xib in Resources */,
 				068B80D8235032B700608996 /* ProfileViewController.xib in Resources */,
 				06D766EB232F868200316C72 /* ExploreTableViewCell.xib in Resources */,
+				06E043A5236A865D00457244 /* ActivityNoneTableViewCell.xib in Resources */,
 				061514942361ABA00050E7D9 /* ProfileSideMenuContentViewCell.xib in Resources */,
 				060D768323474F83005E6820 /* LikedPhotoViewController.xib in Resources */,
 				06E80A7C23459D56005F8275 /* DashboardViewController.xib in Resources */,
 				06CCCD90235ED64B00FFD9F4 /* ProfileContentView.xib in Resources */,
+				06BD57AD2362A48A00CB5BE4 /* SettingsViewController.xib in Resources */,
 				06E80A982345FDB2005F8275 /* DashboardImageTableViewCell.xib in Resources */,
 				06E1B9D3234D94A300E5130A /* CategoryCollectionViewCell.xib in Resources */,
 				0622391D23289C3F0095BC7B /* LaunchScreen.storyboard in Resources */,
@@ -930,12 +976,15 @@
 				06E80A8423459DF0005F8275 /* LoginPresenter.swift in Sources */,
 				06325FB42334A9FC006D67C3 /* NetworkManager.swift in Sources */,
 				06E80A7923459D3E005F8275 /* DashboardViewController.swift in Sources */,
+				06BD57A92362A47000CB5BE4 /* SettingsModels.swift in Sources */,
 				06E80A972345FDB2005F8275 /* DashboardImageTableViewCell.swift in Sources */,
 				06E1B9D2234D94A300E5130A /* CategoryCollectionViewCell.swift in Sources */,
 				061514922361AAEF0050E7D9 /* ProfileSideMenuPointsTableViewCell.swift in Sources */,
 				06ED866F23320904003C0D21 /* EnchanterViewController.swift in Sources */,
+				06BD57AB2362A47000CB5BE4 /* SettingsInteractor.swift in Sources */,
 				06D766E2232F793600316C72 /* LabelExtension.swift in Sources */,
 				06325FC52334C4C3006D67C3 /* DataExtensions.swift in Sources */,
+				06BD57A72362A47000CB5BE4 /* SettingsWorker.swift in Sources */,
 				06E6FD5F233C76E20006D0A0 /* NetworkPlugins.swift in Sources */,
 				062239672328DC930095BC7B /* ButtonExtension.swift in Sources */,
 				06D766E6232F85D000316C72 /* ExploreViewController.swift in Sources */,
@@ -947,8 +996,11 @@
 				06E6FD61233CB8D40006D0A0 /* AuthCompletion.swift in Sources */,
 				06E1B9CB234D942800E5130A /* CategoryViewController.swift in Sources */,
 				06CCCD8E235ED63D00FFD9F4 /* ProfileContentView.swift in Sources */,
+				06BD57A82362A47000CB5BE4 /* SettingsRouter.swift in Sources */,
 				06E80A7623459D3E005F8275 /* DashboardWorker.swift in Sources */,
+				06E043A4236A865D00457244 /* ActivityNoneTableViewCell.swift in Sources */,
 				06325FC02334BE58006D67C3 /* NetworkPath.swift in Sources */,
+				06BD57AA2362A47000CB5BE4 /* SettingsViewController.swift in Sources */,
 				06E80A7523459D3E005F8275 /* DashboardPresenter.swift in Sources */,
 				06E1B9CA234D942800E5130A /* CategoryModels.swift in Sources */,
 				062239692328DF790095BC7B /* ColorExtension.swift in Sources */,
@@ -988,6 +1040,7 @@
 				06CEAE1E2344899800E9EF3C /* ProfilePresenter.swift in Sources */,
 				064BB21723432B2F00392C57 /* BenzierPathExtensions.swift in Sources */,
 				06CEAE212344899800E9EF3C /* ProfileModels.swift in Sources */,
+				06BD57A62362A47000CB5BE4 /* SettingsPresenter.swift in Sources */,
 				0687907C235841E300982D36 /* DashboardRepositoryImpl.swift in Sources */,
 				064BB214234327D600392C57 /* SVGViewController.swift in Sources */,
 				06E1B9C8234D942800E5130A /* CategoryWorker.swift in Sources */,

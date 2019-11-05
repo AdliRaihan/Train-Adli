@@ -14,47 +14,37 @@ import UIKit
 
 @objc protocol DashboardRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToSelectedProfile()
 }
 
 protocol DashboardDataPassing
 {
-  var dataStore: DashboardDataStore? { get }
+    var dataStore: DashboardDataStore? { get }
 }
 
 class DashboardRouter: NSObject, DashboardRoutingLogic, DashboardDataPassing
 {
-  weak var viewController: DashboardViewController?
-  var dataStore: DashboardDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: DashboardViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: DashboardDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+    weak var viewController: DashboardViewController?
+    var dataStore: DashboardDataStore?
+    
+    // MARK: Routing
+    func routeToSelectedProfile() {
+        let destination = ProfileViewController.init(nibName: "ProfileViewController", bundle: nil)
+        _navRoutetoSelectedProfile(source: viewController, destination: destination)
+    }
+    
+    // MARK : Navigation
+    func _navRoutetoSelectedProfile(source : DashboardViewController? , destination : ProfileViewController) {
+        guard source != nil else { return }
+        destination.publicProfile.username = source?.selectedUsername ?? ""
+        destination.profileViewBehavior = ._fromdashboard
+        source!.hidesBottomBarWhenPushed = false
+        source?.show(destination, sender: nil)
+    }
+    
+    // MARK : Data Pass (optional)
+    func _dataRouteToSelectedProfile (source : DashboardDataStore , destination : inout ProfileDataStore) {
+        
+    }
 }
+

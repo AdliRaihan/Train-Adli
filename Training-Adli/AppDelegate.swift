@@ -111,6 +111,7 @@ extension AppDelegate {
                 _window.rootViewController = rootController
             } else {
                 let otherRoot = UINavigationController.init(rootViewController: DashboardTabBarViewController())
+                
                 otherRoot.setNavigationBarHidden(true, animated: false)
                 
                 _window.rootViewController = otherRoot

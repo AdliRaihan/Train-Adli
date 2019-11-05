@@ -21,6 +21,133 @@ enum Profile
         case success (response : Profile.privateProfile.response)
         case failed (message : String)
     }
+    
+    // other people profile
+    enum publicProfile {
+        
+        struct viewModel {
+            
+            struct request {
+                var username : String = ""
+            }
+            
+            struct response {
+                
+            }
+            
+        }
+        
+        
+        enum completion {
+//            case success (response : Profile.publicProfile.response)
+            case failed (message : String)
+        }
+        static func createParams (json : request) -> [String:Any] {
+            return json.toJSON()
+        }
+        
+        class request : Mappable {
+            
+            var username : String = ""
+            
+            init() {
+            }
+            required init?(map: Map) {
+            }
+            
+            func mapping(map: Map) {
+                username <- map["username"]
+            }
+            
+        }
+        
+        
+        struct response : Mappable {
+            var id : String = ""
+            var allowMessages : Int = 0
+            var badge : String = ""
+            var bio : String = ""
+            var name : String = ""
+            var firstName : String = ""
+            var lastName : String = ""
+            var followedByUser : Int = 0
+            var followersCount : Int = 0
+            var followingCount : Int = 0
+            
+            /// Response Photos
+            var photos : [responsePhotos] = []
+            
+            struct responsePhotos : Mappable {
+                var _createdAt : String = ""
+                var _id : String = ""
+                var _updatedAt : String = ""
+                var _urls : urls = urls()
+                
+                init() {}
+                init?(map: Map) {}
+                mutating func mapping(map: Map) {
+                    _createdAt <- map["created_at"]
+                    _id <- map["id"]
+                    _updatedAt <- map["updated_at"]
+                    _urls <- map["urls"]
+                }
+                
+                struct urls : Mappable {
+                    var __full : String = ""
+                    var __raw : String = ""
+                    var __regular : String = ""
+                    var __small : String = ""
+                    var __thumb : String = ""
+                    
+                    init() {}
+                    init?(map: Map) {}
+                    mutating func mapping(map: Map) {
+                        __full <- map["full"]
+                        __raw <- map["raw"]
+                        __regular <- map["regular"]
+                        __thumb <- map["thumb"]
+                    }
+                }
+            }
+            
+            /// End of Struct Resposne Photos
+            var photoProfile : responsePhotoProfile = responsePhotoProfile()
+            
+            /// Response Photo Profile
+            struct responsePhotoProfile : Mappable {
+                var _large : String = ""
+                var _medium : String = ""
+                var _small : String = ""
+                
+                init(){}
+                init?(map: Map) {}
+                mutating func mapping(map: Map) {
+                    _large <- map["large"]
+                    _medium <- map["medium"]
+                    _small <- map["small"]
+                }
+            }
+            
+            // Init
+            init() {}
+            init?(map: Map) {}
+            mutating func mapping(map: Map) {
+                id <- map["id"]
+                name <- map ["name"]
+                firstName <- map ["first_name"]
+                lastName <- map["last_name"]
+                followedByUser <- map["followed_by_user"]
+                followersCount <- map["followers_count"]
+                followingCount <- map["following_count"]
+                photos <- map["photos"]
+                photoProfile <- map["profile_image"]
+            }
+            
+        }
+        
+    }
+    
+    
     // MARK: Use cases
     enum privateProfile {
         struct request {
@@ -52,14 +179,8 @@ enum Profile
             var followers : Int?
             var imageURL : responseImage?
             
-            init() {
-                
-            }
-            
-            init?(map: Map) {
-                
-            }
-            
+            init() {}
+            init?(map: Map) {}
             mutating func mapping(map: Map) {
                 id <- map["id"]
                 updatedAt <- map["updated_at"]

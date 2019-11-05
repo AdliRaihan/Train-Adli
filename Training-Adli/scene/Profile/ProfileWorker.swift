@@ -14,6 +14,8 @@ import UIKit
 
 class ProfileWorker
 {
+    
+    
     func getProfileUser (completion _completion : @escaping (globalEnum) -> Void ) {
         trainProvider.request(trainServices.getProfile()) { (result) in
             switch result {
@@ -27,5 +29,20 @@ class ProfileWorker
             }
         }
     }
+    
+    func getPublicProfileUser (request : Profile.publicProfile.request , completion _completion : @escaping (globalEnum) -> Void) {
+        trainProvider.request(trainServices.getPublicProfile(request: request)) { (result) in
+            switch result {
+            case .success(let response):
+                _completion(.success(data:response))
+                break
+            case .failure(let error):
+                _completion(.error(error: error.localizedDescription))
+                break
+            }
+        }
+    }
+    
+    
 }
 

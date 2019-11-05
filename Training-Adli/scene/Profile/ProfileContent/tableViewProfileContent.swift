@@ -9,7 +9,6 @@
 import UIKit
 
 class tableViewProfileContent: UITableView {
-
     
     // initial Init
     override init(frame: CGRect, style: UITableView.Style) {
@@ -36,30 +35,9 @@ class tableViewProfileContent: UITableView {
 
 extension ProfileViewController : UITableViewDelegate , UITableViewDataSource {
     
-    
-    // For editing inside the object
-    class func dataStoreCell (cell : UITableViewCell) -> UITableViewCell {
-        
-        func collectionCell () -> UITableViewCell {
-            if let _cell = cell as? CollectionTableViewCell {
-                return(_cell)
-            }
-            return cell
-        }
-        
-        switch cell {
-        case cell as? CollectionTableViewCell :
-            "Collection Cell".createMessage(message: "Its Initialized!")
-            return collectionCell()
-        default:
-            return UITableViewCell()
-        }
-        
-    }
-    
     // Number of cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return (finishLoading) ? 1 : 0
     }
     
     // Cell
@@ -68,18 +46,17 @@ extension ProfileViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 260
+        return determineRowHeight(row: indexPath.row)
     }
     
-    // Cell class function
-    
-    func _initialCell (row : Int) -> UITableViewCell {
+    // Determine Row Heights
+    private func determineRowHeight ( row : Int ) -> CGFloat {
+        if ( isCollectionZero )  { return 255.5}
         switch row {
         case 0:
-            let nib = UINib.init(nibName: "CollectionTableViewCell", bundle: nil)
-            registerCell(nib: nib, identifier: "collectionUser")
-            return tableViewProfileContent.dequeueReusableCell(withIdentifier: "collectionUser")!
-        default : return UITableViewCell()
+            return 260
+            
+        default: return 0.0
         }
     }
     
@@ -94,5 +71,49 @@ extension ProfileViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     
+    // Cell class function
+    func _initialCell (row : Int) -> UITableViewCell {
+        "Collection Zero Is".createMessage(message: isCollectionZero)
+        if isCollectionZero {
+            return __intialCell(nib: "ActivityNoneTableViewCell", identifier: "noneActivity")
+        }
+        
+        switch row {
+        case 0:
+            return __intialCell(nib: "CollectionTableViewCell", identifier: "collectionUser")
+        default : return UITableViewCell()
+        }
+    }
+    
+    // Initialize Cell __
+    private func  __intialCell(nib : String , identifier : String) -> UITableViewCell {
+        let _nib = UINib.init(nibName: nib, bundle: nil)
+        registerCell(nib: _nib, identifier: identifier)
+        return tableViewProfileContent.dequeueReusableCell(withIdentifier: identifier)!
+    }
+    
+    
+    // For editing inside the object
+    class func dataStoreCell (cell : UITableViewCell) -> UITableViewCell {
+        
+        func collectionCell () -> UITableViewCell {
+            if let _cell = cell as? CollectionTableViewCell {
+                return(_cell)
+            }
+            return cell
+        }
+        
+        switch cell {
+        case cell as? ActivityNoneTableViewCell :
+            "Activity Table ".createMessage(message: "Initialized!")
+            return cell
+        case cell as? CollectionTableViewCell :
+            "Collection Cell".createMessage(message: "Its Initialized!")
+            return collectionCell()
+        default:
+            return UITableViewCell()
+        }
+        
+    }
     
 }

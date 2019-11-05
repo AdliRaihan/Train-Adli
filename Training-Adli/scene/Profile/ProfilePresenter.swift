@@ -15,6 +15,7 @@ import UIKit
 protocol ProfilePresentationLogic
 {
     func presentProfile(response : Profile.privateProfile.response)
+    func presentPublicProfile (response : Profile.publicProfile.response)
 }
 
 class ProfilePresenter: ProfilePresentationLogic
@@ -30,6 +31,10 @@ class ProfilePresenter: ProfilePresentationLogic
         model.followers = response.followers ?? 0
         model.imageURL = response.imageURL?._large ?? ""
         viewController?.displayToProfile(viewModel: model)
+    }
+    
+    func presentPublicProfile(response: Profile.publicProfile.response) {
+        viewController?.displayToPublicProfile(response: response)
     }
 }
 

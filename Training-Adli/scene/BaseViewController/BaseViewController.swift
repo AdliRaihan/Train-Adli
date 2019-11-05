@@ -13,6 +13,11 @@ import CoreData
 class BaseViewController: UIViewController {
 
     fileprivate weak var appDelegate = AppDelegate.shared
+    fileprivate var loadingView : UIView! = UIView()
+    fileprivate var shadowView : UIView! = UIView()
+    fileprivate var viewHolder : UIView! = UIView()
+    
+    var timerLoading : Timer = Timer()
     var context : NSManagedObjectContext?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -24,6 +29,75 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         setupCoreData()
         setupNavigation()
+    }
+    
+    private func _loadingView () -> UIView {
+        let loading = UIView.init(frame: .init(x: -50, y: 0, width: 50, height: 2))
+        loading.backgroundColor = UIColor.init(rgb: 0x1c313a)
+        loading.circleRadius()
+        return loading
+    }
+    
+    private func _manipulateShadow () -> UIView {
+        let shadow = UIView.init(frame: .init(x: -50, y: 2, width: 50, height: 3))
+        shadow.backgroundColor = UIColor.init(rgb: 0x1c313a).withAlphaComponent(0.1)
+        shadow.circleRadius()
+        return shadow
+    }
+    
+    func setupLoading(_view : UIView) {
+        self.loadingView = _loadingView()
+        self.shadowView = _manipulateShadow()
+        self.viewHolder = _view
+        
+        
+        viewHolder.addSubview(loadingView)
+        viewHolder.addSubview(shadowView)
+        showLoading()
+        timerLoading = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { (timer) in
+            self.showLoading()
+        }
+        
+    }
+    
+    private func showLoading () {
+        let frame = viewHolder.frame
+        self.loadingView.frame = .init(x: -50, y: 0, width: 50, height: 2)
+        self.shadowView.frame = .init(x: -50, y: 2, width: 50, height: 3)
+        UIView.animate(withDuration: 1, animations: {
+            self.loadingView.frame = .init(x: frame.width / 3, y: 0, width: frame.width / 2, height: 2)
+            self.shadowView.frame = .init(x: frame.width / 3, y: 2, width: frame.width / 2, height: 3)
+        }) { (finish) in
+            UIView.animate(withDuration: 1, animations: {
+                self.loadingView.frame = .init(x: frame.width + 75, y: 0, width: 50, height: 2)
+                self.shadowView.frame = .init(x: frame.width + 75, y: 2, width: 50, height: 3)
+            })
+        }
+    }
+    
+    func dismissLoading () {
+        guard (loadingView != nil) && (shadowView != nil) else {return}
+        timerLoading.invalidate()
+        
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+            self.loadingView.frame = .init(x: 0, y: 0, width: 0, height: 2)
+            UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut], animations: {
+                self.loadingView.frame = .init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 1)
+            }) { (finish) in
+                self.fadeView(_view: self.viewHolder)
+            }
+            
+        }
+    }
+    
+    func fadeView( _view : UIView) {
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
+            self.loadingView.alpha = 0.25
+            self.shadowView.alpha = 0.25
+        }) { (Bool) in
+//            self.loadingView.removeFromSuperview()
+//            self.shadowView.removeFromSuperview()
+        }
     }
     
     private func setupCoreData () {

@@ -17,6 +17,7 @@ import WebKit
 protocol ProfileDisplayLogic: class
 {
     func displayToProfile(viewModel : Profile.privateProfile.viewModel)
+    func displayToPublicProfile(response : Profile.publicProfile.response)
 }
 
 enum profileViewer {
@@ -27,7 +28,7 @@ enum profileViewer {
     case _fromdashboard
 }
 
-class ProfileViewController: UIViewController, ProfileDisplayLogic
+class ProfileViewController: BaseViewController, ProfileDisplayLogic
 {
     // Outlets
     @IBOutlet weak var openSideMenuButton: UIButton! {
@@ -38,12 +39,32 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
             openSideMenuButton.setTitle("", for: .normal)
         }
     }
+    
     @IBOutlet weak var topConstraintProfileSection: NSLayoutConstraint!
     @IBOutlet weak var profileSectionViewHolder: UIView!
+    @IBOutlet weak var imageMinimalProfile: UIImageView! {
+        didSet {
+            imageMinimalProfile.circleRadius(withBorder: true, borderColor: .lightGray, opacity: 0.5, borderWidth: 1)
+            imageMinimalProfile.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var imageProfile: UIImageView! {
         didSet{
-            imageProfile.circleRadius()
+            imageProfile.circleRadius(withBorder: true, borderColor: .lightGray, opacity: 0.5, borderWidth: 1)
             imageProfile.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var followButton: UIButton! {
+        didSet {
+            followButton.setShadow()
+            followButton.circleRadius()
+            followButton.backgroundColor = UIColor.init(rgb: 0x1c313a)
+        }
+    }
+    @IBOutlet weak var messageButton: UIButton! {
+        didSet {
+            messageButton.backgroundColor = UIColor.white.withAlphaComponent(0)
+            messageButton.setTitleColor(UIColor.init(rgb: 0x1c313a), for: .normal)
         }
     }
     
@@ -56,6 +77,13 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     
     @IBOutlet weak var followInContentButton: UIButton!
     @IBOutlet weak var usernameInContentLabel: UILabel!
+    
+    // List Of Outlet Image
+    @IBOutlet weak var outletImage: UIView!
+    
+    
+    
+    //
     
     
     @IBOutlet weak var imageCollectionPrimary : UIImageView!
@@ -79,9 +107,15 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     
     @IBOutlet weak var newProfileHolder: UIView!
     
+    // Costum View Object
+    private var UIBackCostum : UIView?
+    var finishLoading = false
     
     // List Object
     lazy var contentCell : [ UITableViewCell ] = [CollectionTableViewCell()]
+    var publicProfile = Profile.publicProfile.viewModel.request.init()
+    var profileViewBehavior : profileViewer = ._other
+    var isCollectionZero : Bool = false
     var isMenuOpen = false
     var interactor: ProfileBusinessLogic?
     var router: (NSObjectProtocol & ProfileRoutingLogic & ProfileDataPassing)?
@@ -100,8 +134,7 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
         setup()
     }
     
-    // MARK: Setu
-    
+    // MARK: Setup
     private func setup()
     {
         let viewController = self
@@ -128,29 +161,42 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     }
     
     // MARK: View lifecycle
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         newSetupUI()
         newSetupIO()
-        attachProfileContent()
+        checkProfileBehavior()
 //        setupUI()
 //        setupIO()
-//        do_getProfile()
+        (self.publicProfile.username.isEmpty) ? do_getProfile() : do_getPublicProfile()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        "DOES IT GET CALLED ? ".createMessage(message: "YES")
+        checkProfileBehavior()
+        attachProfileContent()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = false
+        if !finishLoading {
+            self.setupLoading(_view: self.tableViewProfileContent)
+        }
     }
     
     private func newSetupUI () {
         self.newProfileHolder.setShadow()
-        self.scrollViewContentHeights.constant = self.scrollViewContentHeights.constant + 300.0
+        self.scrollViewContentHeights.constant = self.scrollViewContentHeights.constant + 145.0
         self.scrollView.delegate = self
         self.scrollView.bounces  = false
         self.leftSideMenuConstraint.constant = -UIScreen.main.bounds.width
+        self.followInContentButton.alpha = 0
     }
     
     private func newSetupIO () {
-        
-        
     }
     
     private func attachProfileContent () {
@@ -171,8 +217,68 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
         menuSideHideGestureView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hideSideBarMenu)))
     }
     
+    private func checkProfileBehavior () {
+        switch profileViewBehavior {
+        case ._self:
+            navigationController?.setNavigationBarHidden(true, animated: false)
+            break
+        case ._other:
+            navigationController?.setNavigationBarHidden(true, animated: false)
+            break
+        case ._mod:
+            navigationController?.setNavigationBarHidden(false, animated: false)
+            break
+        case ._friends:
+            navigationController?.setNavigationBarHidden(false, animated: false)
+            break
+        case ._fromdashboard:
+            _createBackButton()
+            break
+        }
+    }
+    
+    private func _createBackButton () {
+        let _hitBoxes = UIView.init(frame: .init(x: 15, y: 30, width: 50, height: 50))
+        let _viewHolder = UIView.init(frame: .init(x: 0, y: 0, width: 35, height: 35))
+        let _imageView = UIImageView.init(frame: .init(x: 0, y: 0, width: 35, height: 35))
+        let _image = UIImage.init(named: "ic_back")?.withRenderingMode(.alwaysTemplate)
+        
+        _imageView.image = _image ?? UIImage()
+        _imageView.tintColor = .white
+        
+        _viewHolder.circleRadius()
+        _viewHolder.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        _viewHolder.addSubview(_imageView)
+        _viewHolder.setShadow()
+        
+        _hitBoxes.addSubview(_viewHolder)
+        _hitBoxes.isUserInteractionEnabled = true
+        _hitBoxes.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(_backbuttonAction)))
+        
+        self.UIBackCostum = _hitBoxes
+        view.addSubview(UIBackCostum ?? _hitBoxes)
+        openSideMenuButton.isHidden = true
+        "Back Button".createMessage(message: "Created Successfully!")
+    }
+    
+    @objc private func _backbuttonAction () {
+        self.motionDismissViewController()
+    }
+    
     private func do_getProfile() {
         interactor?.getProfile()
+    }
+    
+    private func do_getPublicProfile () {
+        // UIAsssigned
+        usernameProfile.text = publicProfile.username
+        // variables
+        let _publicProfile = Profile.publicProfile.request()
+        _publicProfile.username = publicProfile.username
+        
+        // action
+        interactor?.getPublicProfile(request: _publicProfile)
+        
     }
     
     
@@ -194,11 +300,29 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
         }
     }
     
+    /// Display Methods
+    
     func displayToProfile(viewModel: Profile.privateProfile.viewModel) {
+        if viewModel.collection == nil { isCollectionZero = true }
+        else { isCollectionZero = (viewModel.collection! == 0) }
         self.collectionsCountProfile.text = "\(viewModel.collection ?? 0)"
         self.followersCountProfile.text = "\(viewModel.followers ?? 0)"
         self.usernameProfile.text = "@\(viewModel.username ?? "...." )"
         self.imageProfile.kf.setImage(with: URL.init(string: viewModel.imageURL ?? ""))
+        self.finishLoading = true
+        self.dismissLoading()
+        self.tableViewProfileContent.reloadData()
+    }
+    
+    func displayToPublicProfile(response: Profile.publicProfile.response) {
+//        self.usernameProfile.text = response
+        self.followersCountProfile.text = "\(response.followersCount)"
+        self.imageProfile.kf.setImage(with: URL.init(string: response.photoProfile._medium))
+        self.imageMinimalProfile.kf.setImage(with: URL.init(string: response.photoProfile._medium))
+        self.isCollectionZero = true
+        self.finishLoading = true
+        self.dismissLoading()
+        self.tableViewProfileContent.reloadData()
     }
     
     // Action button to show left side menu
@@ -217,7 +341,11 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
     
     // methods for change button tint Color
     private func changeButtonColor () {
+        let imageDefault = UIImage.init(named: "ic_menu")
+        let imageCloseMenu = UIImage.init(named: "ic_back")
+        
         self.openSideMenuButton.tintColor = (isMenuOpen) ? UIColor.white : UIColor.black
+        self.openSideMenuButton.setImage((isMenuOpen) ? imageDefault : imageCloseMenu , for: .normal)
     }
     
     // MARK: Do something
@@ -225,6 +353,11 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
         Defaults[.userAuthenticationCode] = ""
         WKWebView().clearCache()
         self.router?.routeToLogout()
+    }
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
 }
@@ -244,8 +377,6 @@ extension ProfileViewController : UIScrollViewDelegate {
         guard scrollView == self.scrollView else { return }
         
         tableViewProfileContent.isScrollEnabled = false
-        topConstraintProfileSection.constant = (yOffset / 20)
-        profileSectionViewHolder.alpha = 1 - (yOffset / 300)
         
         // Content Switcher
         if yOffset > 25 {
@@ -254,8 +385,9 @@ extension ProfileViewController : UIScrollViewDelegate {
             self.scrollViewInsideContent.setShadow(withColor: UIColor.white, Opacity: 0)
         }
         
-        // Show Or Hide Username & Follow
-        if yOffset > 290 {
+        // Show Or Hide Username & Follo
+        self.imageProfile.circleRadius()
+        if yOffset == 145 {
             tableViewProfileContent.isScrollEnabled = true
             _showOrHideUsernameAndFollow()
         } else {
@@ -266,8 +398,11 @@ extension ProfileViewController : UIScrollViewDelegate {
     
     private func _showOrHideUsernameAndFollow (hide : Bool = false) {
         let alpha : CGFloat = (hide) ? 0 : 1
+        self.imageProfile.circleRadius(withBorder: true, borderColor: .lightGray, opacity: 0.5, borderWidth: 1)
         UIView.animate(withDuration: 0.25) {
-            self.usernameInContentLabel.alpha = alpha
+            self.outletImage.alpha = alpha
+            self.imageProfile.alpha = 1 - alpha
+            self.loadViewIfNeeded()
         }
     }
     

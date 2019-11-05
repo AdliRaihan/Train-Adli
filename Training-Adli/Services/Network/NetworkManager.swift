@@ -17,6 +17,7 @@ enum trainServices {
     case oauth (request : unsplash.AuthRequest)
     case oatuhAccessToken (request : unsplash.oauthTokenModel.tokenRequest)
     case getPhotos (request : Dashboard.getPhotos.request)
+    case getPublicProfile(request : Profile.publicProfile.request)
     case getProfile ()
     
     // POST

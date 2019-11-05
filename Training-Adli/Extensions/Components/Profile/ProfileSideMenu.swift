@@ -41,7 +41,6 @@ class ProfileSideMenu: UIView {
     // Test
     override func awakeAfter(using aDecoder: NSCoder) -> Any? {
         return super.awakeAfter(using: aDecoder)
-        
     }
     
     // Fix Uncorrectly width 

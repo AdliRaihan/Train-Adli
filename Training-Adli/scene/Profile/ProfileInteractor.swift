@@ -16,6 +16,7 @@ import ObjectMapper
 protocol ProfileBusinessLogic
 {
     func getProfile()
+    func getPublicProfile(request : Profile.publicProfile.request)
 }
 
 protocol ProfileDataStore
@@ -53,5 +54,36 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore
             }
         }
     }
+    
+    
+    func getPublicProfile(request: Profile.publicProfile.request) {
+        
+        ProfileWorker().getPublicProfileUser(request: request) { (data) in
+            // todo later:
+            switch data {
+            case .success(let data):
+                do {
+                    let map = Mapper<Profile.publicProfile.response>().map(JSON: try data.mapJSON() as! [String:Any])
+                    "SuccessLogs".createMessage(message: try data.mapJSON())
+                    if map == nil {
+                        
+                    } else {
+                        "Map _ Success".createMessage(message: map!)
+                        self.presenter?.presentPublicProfile(response: map!)
+                    }
+                }
+                catch ( let error ) {
+                    "Map _ Failed".createMessage(message: error.localizedDescription)
+                }
+                break
+            case .error(let error):
+                "Map _ Failed".createMessage(message: error)
+                break
+            }
+        }
+        
+    }
+    
+    
 }
 

@@ -36,6 +36,7 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
     private var dsTableView = Dashboard.getPhotos.tableViewModel.init()
     private var dsIsRefreshed = false
     private var dsIsExpanded = false
+    var selectedUsername : String = ""
     var interactor: DashboardBusinessLogic?
     var router: (NSObjectProtocol & DashboardRoutingLogic & DashboardDataPassing)?
     
@@ -51,8 +52,6 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
         super.init(coder: aDecoder)
         setup()
     }
-    
-    // MARK: Setup
     
     private func setup()
     {
@@ -98,6 +97,10 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
             }
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func displayOfflineImages () {
@@ -195,6 +198,7 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
         guard _response.responsePrimary != nil else { return }
         guard _response.responsePrimary!.count > 0 else { return }
         let urlImage : String = _response.responsePrimary!.last!.urls!._regular ?? ""
+        self.resetDataStore()
         imageHolderDashboard.kf.setImage(with: URL.init(string: urlImage))
         Defaults[.appDefaultImageHeader] = urlImage
         
@@ -236,7 +240,6 @@ class DashboardViewController: BaseViewController, DashboardDisplayLogic
     }
     
     @objc private func testNotificationCenter () {
-        "Test".createMessage(message: "HELLO !!!!")
         let notificationCenter = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
@@ -311,6 +314,7 @@ extension DashboardViewController : UITableViewDelegate , UITableViewDataSource 
                 }
             }
         }
+        
 //        return cell
     }
     
@@ -341,12 +345,18 @@ extension DashboardViewController : UITableViewDelegate , UITableViewDataSource 
 }
 
 extension DashboardViewController : dashboardCellImageDelegate {
+    
     func _didLike(id: String) {
         _createAddQueueTasks(id)
     }
     
     func _didUnlike(id: String) {
         __createAddQueueTasks(id)
+    }
+    
+    func _signalRouteToSelectedProfile(id: String) {
+        self.selectedUsername = id
+        router?.routeToSelectedProfile()
     }
     
     private func _createAddQueueTasks (_ ids : String) {
@@ -374,7 +384,7 @@ extension DashboardViewController : UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let indexValue : CGFloat = scrollView.contentOffset.y
-        if indexValue <= -150 && !self.dsIsRefreshed {
+        if indexValue <= -100 && !self.dsIsRefreshed {
             self.dsIsRefreshed = true
             self.resetDataStore()
             self.interactor?.getAllPhotos(request: demandRequest)

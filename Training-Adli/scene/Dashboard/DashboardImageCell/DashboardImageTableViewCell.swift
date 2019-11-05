@@ -11,13 +11,22 @@ import UIKit
 protocol dashboardCellImageDelegate : class  {
     func _didLike (id:String)
     func _didUnlike (id:String)
+    func _signalRouteToSelectedProfile(id: String)
 }
 
 class DashboardImageTableViewCell: UITableViewCell {
-
+    
+    
+    
     struct dashboardImageCellDS {
         var id : String?
         var isLikedByUser : Int?
+    }
+    
+    @IBOutlet weak var popUpMenuMinimal: UIView! {
+        didSet {
+            popUpMenuMinimal.setShadow()
+        }
     }
     
     @IBOutlet weak var imageDownload: UIImageView! {
@@ -80,6 +89,7 @@ class DashboardImageTableViewCell: UITableViewCell {
     @IBOutlet weak var imageCell: UIImageView!
     weak var idDelegate : dashboardCellImageDelegate?
     var datastore : dashboardImageCellDS = dashboardImageCellDS()
+    var isOpen : Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -154,4 +164,33 @@ class DashboardImageTableViewCell: UITableViewCell {
         }
     }
     
+    
+    // Outlet Action - Button
+    @IBAction func _usernameClickAction(_ sender: Any) {
+        self.idDelegate?._signalRouteToSelectedProfile(id: usernameLabel.text ?? "" )
+    }
+    
+    @IBAction func popUpMenuAction(_ sender: Any) {
+        if !isOpen {
+            showPopup()
+        } else {
+            hidePopUp()
+        }
+    }
+    
+    private func showPopup () {
+        self.isOpen = true
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseInOut], animations: {
+            self.popUpMenuMinimal.alpha = 1
+        }) { (finish) in
+        }
+    }
+    
+    private func hidePopUp () {
+        self.isOpen = false
+        UIView.animate(withDuration: 0.12345, delay: 0, options: [.curveEaseInOut], animations: {
+            self.popUpMenuMinimal.alpha = 0
+        }) { (finish) in
+        }
+    }
 }

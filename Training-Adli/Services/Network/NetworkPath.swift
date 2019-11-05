@@ -17,6 +17,8 @@ class NetworkPath {
             return "oauth/token"
         case .getProfile():
             return "me"
+        case .getPublicProfile(let request):
+            return "users/\(request.username)"
         case .getPhotos:
             return "photos"
         case .setActionLike(let request):

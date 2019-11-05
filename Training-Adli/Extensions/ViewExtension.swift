@@ -22,11 +22,11 @@ extension UIView {
     }
     
     // circle (____)
-    func circleRadius (withBorder : Bool = false) {
+    func circleRadius (withBorder : Bool = false, borderColor : UIColor = .gray, opacity : CGFloat = 0.25,borderWidth : CGFloat = 1) {
         layer.cornerRadius = frame.height / 2
         if withBorder {
-            layer.borderColor = UIColor.gray.cgColor.copy(alpha: 0.25)
-            layer.borderWidth = 1
+            layer.borderColor = borderColor.cgColor.copy(alpha: opacity)
+            layer.borderWidth = borderWidth
         }
     }
     

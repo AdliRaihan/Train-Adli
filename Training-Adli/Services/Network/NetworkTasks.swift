@@ -36,7 +36,13 @@ class NetworkTasks {
             // set Unlike Action
         case .setActionUnlike(let request):
             return .requestParameters(parameters: Dashboard.likePhotos.createParams(request: request), encoding: URLEncoding.default)
+            
+            // get public user data
+        case .getPublicProfile(let request):
+            return .requestParameters(parameters: Profile.publicProfile.createParams(json: request), encoding:  URLEncoding.default)
         }
+        
+        
     
     }
 }
