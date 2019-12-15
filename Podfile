@@ -28,7 +28,7 @@ target 'Training-Adli' do
 #  pod 'WRUserSettings', :git => 'https://github.com/azanium/WRUserSettings.git', :branch => 'master'
   pod 'SwiftyUserDefaults', '4.0.0-beta.2'
   pod 'XLPagerTabStrip', '~> 8.0'
-  pod 'RealmSwift' , = 3.17.1'
+  pod 'RealmSwift' , '= 3.17.1'
   pod 'RxSwift',    '~> 4.0'
   pod 'FDTake' , '= 3.0.0'
   pod 'PureLayout'

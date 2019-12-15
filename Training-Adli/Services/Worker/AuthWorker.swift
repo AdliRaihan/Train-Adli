@@ -2,35 +2,24 @@
 //  AuthWorker.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 20/09/19.
+//  Created by Adli Raihan on 20/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
 import Foundation
 import ObjectMapper
 
-enum localCompletion {
-    case success (response : String)
-}
-enum tokenCompletion {
-    case success()
-}
-
 class AuthWorker {
-    func getAuth (_ localRequest : unsplash.AuthRequest,_ completion: @escaping (localCompletion) -> Void) {
+    func getAuth (_ localRequest : unsplash.AuthRequest,_ completion: @escaping (AuthCompletion.AuthorizationCredential) -> Void) {
         trainProvider.request(trainServices.oauth(request: localRequest)) { (result) in
             switch result {
             case .success(let success):
-                
-                "testing".createMessage(message: "\(trainServices.oauth(request: localRequest))")
-                
                 do {
                     let mapbaru = try success.mapJSON()
-                    trainServices.oauth(request: localRequest).headers
-                    "berhasil".createMessage(message: "\(mapbaru) \(String(describing: trainServices.oauth(request: localRequest).headers))")
+                    "Success".createMessage(message: "\(mapbaru) \(String(describing: trainServices.oauth(request: localRequest).headers))")
                 }
                 catch {
-                    "ggl".createMessage(message: "masihgagal")
+                    "Failed".createMessage(message: "Mapping Failed")
                 }
                 do {
                     let map = try success.mapString()
@@ -41,39 +30,37 @@ class AuthWorker {
                 }
                 break
             case .failure(let error):
-                "ERR".createMessage(message: error.localizedDescription)
+                "Error".createMessage(message: error.localizedDescription)
                 break
             }
         }
     }
     
-    func getToken (_ localRequest : unsplash.oauthTokenModel.tokenRequest,_ completion : @escaping (tokenCompletion) -> Void) {
+    func getToken (_ localRequest : unsplash.oauthTokenModel.tokenRequest,_ completion : @escaping (AuthCompletion.tokenCompletion) -> Void) {
         trainProvider.request(trainServices.oatuhAccessToken(request: localRequest)) { (result) in
-            "Path".createMessage(message: "\(result)")
             switch result {
             case .success(let success):
                 "Success".createMessage(message: "\(success)")
                 do {
-                    let map = try success.mapString()
-                    "Success".createMessage(message: "\(map)")
+                    let map = Mapper<unsplash.oauthTokenModel.tokenResponse>().map(JSON: try success.mapJSON() as! [String : Any])
+                    "Success".createMessage(message: "\(String(describing: map?.toJSONString(prettyPrint: true)))")
+                    
+                    if map == nil {
+                        completion(.failed(message: "Failed to Maping to response Object!"))
+                    } else {
+                        completion(.success(response: map!))
+                    }
+                    
                 }
                 catch {
                     "Unexception".createMessage(message: error.localizedDescription)
                 }
                 break
             case .failure(let error):
-                "Failure".createMessage(message: error.localizedDescription)
+                "Error".createMessage(message: error.localizedDescription)
                 break
             }
             
         }
     }
 }
-
-/*
- https://unsplash.com/oauth/authorize?
-        client_id=158e22d2be6cab776308c3250270a395cc2813ca8346c59643b949a4c68ae513&
-        redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&
-        response_type=code&
-        scope=public+read_user
- */

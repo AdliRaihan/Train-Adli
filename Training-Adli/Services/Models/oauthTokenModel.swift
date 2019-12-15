@@ -2,7 +2,7 @@
 //  oauthTokenModel.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 20/09/19.
+//  Created by Adli Raihan on 20/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
@@ -49,6 +49,7 @@ extension unsplash {
         }
         
         class tokenResponse : Mappable {
+            
             var accessToken : String = ""
             var tokenType : String = ""
             var scope : String = ""
@@ -63,7 +64,6 @@ extension unsplash {
                 tokenType       <- map["token_type"]
                 scope           <- map["scope"]
                 createdAt       <- map["created_at"]
-                
             }
         }
     }

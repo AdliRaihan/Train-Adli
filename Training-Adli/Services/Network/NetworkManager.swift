@@ -2,29 +2,44 @@
 //  NetworkManager.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 20/09/19.
+//  Created by Adli Raihan on 20/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
 import Foundation
+import SwiftyUserDefaults
 import Moya
 
-let trainProvider = MoyaProvider<trainServices>(plugins: [NetworkPlugins()])
+let authPlugin = AccessTokenPlugin.init(tokenClosure: Defaults[.userAuthenticationCode])
+let trainProvider = MoyaProvider<trainServices>(plugins: [NetworkPlugins(),authPlugin])
 
 enum trainServices {
     case oauth (request : unsplash.AuthRequest)
     case oatuhAccessToken (request : unsplash.oauthTokenModel.tokenRequest)
+    case getPhotos (request : Dashboard.getPhotos.request)
+    case getPublicProfile(request : Profile.publicProfile.request)
+    case getProfile ()
+    
+    // POST
+    case setActionLike (request : Dashboard.likePhotos.request)
+    
+    // DELETE
+    case setActionUnlike (request : Dashboard.likePhotos.request)
 }
 
 
-extension trainServices : TargetType {
+extension trainServices : TargetType , AccessTokenAuthorizable {
     var baseURL: URL {
-        return URL.init(string: ConstantVariables.baseURLAuth)!
+        switch self {
+        case .oatuhAccessToken: return URL.init(string: ConstantVariables.baseURL)!
+        default : return URL.init(string: ConstantVariables.baseURLAuth)!
+        }
     }
     
     var method: Moya.Method {
         switch self {
-        case .oatuhAccessToken : return .post
+        case .setActionUnlike: return .delete
+        case .oatuhAccessToken,.setActionLike : return .post
         default: return .get
         }
     }
@@ -36,14 +51,20 @@ extension trainServices : TargetType {
     var task: Task {
         return NetworkTasks.createRequest(service: self)
     }
-    
+
     var headers: [String : String]? {
-        "Belegug".createMessage(message: "\(NetworkHeader.header(self))")
+        "Headers".createMessage(message: "\(NetworkHeader.header(self))")
         return NetworkHeader.header(self)
     }
     
     var path : String {
         return NetworkPath.createPath(self) ?? ""
+    }
+    
+    var authorizationType: AuthorizationType {
+        switch self {
+        default: return .bearer
+        }
     }
     
 }

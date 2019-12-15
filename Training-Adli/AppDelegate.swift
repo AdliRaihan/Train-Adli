@@ -2,15 +2,18 @@
 //  AppDelegate.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 11/09/19.
+//  Created by Adli Raihan on 11/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
 import UIKit
 import CoreData
+import UserNotifications
+import SwiftyUserDefaults
+import RealmSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate {
 
     static let shared = AppDelegate()
     var window: UIWindow?
@@ -44,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         self.deleteAllCoreData(required: "Entity")
         self.setupNewRootController()
+        self.requestAccessNotification()
+        self._realmConfig()
         return true
     }
     
@@ -76,13 +81,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound,.badge])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        "Response Identifier".createMessage(message: response.notification.request.identifier)
+        
+    }
 
 }
 
 extension AppDelegate {
     private func setupNewRootController () {
         let rootController : UINavigationController  = UINavigationController.init(nibName: nil, bundle: nil)
-        rootController.viewControllers = [DashboardViewController.init(nibName: "DashboardViewController", bundle: nil)]
+        rootController.viewControllers = [LoginViewController.init(nibName: "LoginViewController", bundle: nil)]
         
         rootController.navigationBar.barStyle = .black
         rootController.navigationBar.tintColor = UIColor.white
@@ -90,8 +104,49 @@ extension AppDelegate {
         
         if let _window = window {
             "AppDelegate".createMessage( message: "Initialize Root View Controller" )
-            _window.rootViewController = rootController
+            
+            if Defaults[.userAuthenticationCode].isEmpty {
+                rootController.setNavigationBarHidden(true, animated: false)
+                
+                _window.rootViewController = rootController
+            } else {
+                let otherRoot = UINavigationController.init(rootViewController: DashboardTabBarViewController())
+                
+                otherRoot.setNavigationBarHidden(true, animated: false)
+                
+                _window.rootViewController = otherRoot
+            }
         }
+    }
+    
+    private func manualRoot () {
+        let otherRoot = UINavigationController.init(rootViewController: DashboardTabBarViewController())
+        otherRoot.setNavigationBarHidden(true, animated: false)
+        if let _window = window {
+            _window.rootViewController = otherRoot
+        }
+    }
+    
+    private func requestAccessNotification() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        let options : UNAuthorizationOptions  = [.alert,.sound,.badge]
+        
+        notificationCenter.delegate = self
+        
+        notificationCenter.requestAuthorization(options: options) { (isGranted, error) in
+            guard error == nil else {return}
+            
+            if !isGranted {
+                print("Declined!")
+            }
+            
+        }
+    }
+    
+    private func _realmConfig () {
+        let configuration = Realm.Configuration( schemaVersion : 1 )
+        // -
+        Realm.Configuration.defaultConfiguration = configuration
     }
 }
 

@@ -2,7 +2,7 @@
 //  ColorExtension.swift
 //  Training-Adli
 //
-//  Created by Stella Patricia on 11/09/19.
+//  Created by Adli Raihan on 11/09/19.
 //  Copyright © 2019 Adli Raihan. All rights reserved.
 //
 
@@ -11,6 +11,14 @@ import Material
 import UIKit
 
 extension UIColor {
+    
+    
+    private func colorFormat (_string :String) -> Int {
+        if let color = Int(_string.replacingOccurrences(of: "#", with: "")) {
+            return color
+        }
+        fatalError("Invalid format color hexa!")
+    }
     
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
@@ -30,8 +38,8 @@ extension UIColor {
     
     func gradientAtDashboard () -> CAGradientLayer? {
         let gradientLayer : CAGradientLayer = CAGradientLayer()
-        let topColor = UIColor.init(rgb: 0x232526)
-        let bottomColor = UIColor.init(rgb: 0x414345)
+        let topColor = UIColor.init(rgb: 0x484848).withAlphaComponent(0)
+        let bottomColor = UIColor.init(rgb: 0x484848).withAlphaComponent(1)
         
         gradientLayer.colors = [topColor.cgColor,bottomColor.cgColor]
         return gradientLayer
