@@ -21,3 +21,5 @@ goes to my account , if this happen i will make this repo still private . thank 
 
 
 whatever you do dont use my client id & s_id for make a request heehehehehhee i have no time for change that
+
+#happy learning :)
